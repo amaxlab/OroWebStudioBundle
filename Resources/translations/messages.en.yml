@@ -1,0 +1,13 @@
+amaxlab:
+    oro:
+        webstudio:
+            credential:
+                entity_label: Credential
+                comment.label: Comment
+                expired_at.label: Expired At
+                id.label: ID
+                organization.label: Organization
+                owner.label: Owner
+                password.label: Password
+                username.label: Username
+                token.label: Token
