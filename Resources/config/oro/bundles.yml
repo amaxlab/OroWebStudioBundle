@@ -1,2 +1,2 @@
 bundles:
-    - { name: Oro\Bundle\ActivityBundle\OroActivityBundle }
+    - { name: AmaxLab\Oro\WebStudioBundle\WebStudioBundle }

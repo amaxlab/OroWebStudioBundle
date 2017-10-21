@@ -1,0 +1,6 @@
+services:
+    AppOrderBundle\Repository\OrderRepository:
+        class: AmaxLab\Oro\WebStudioBundle\Repository\CredentialRepository
+        parent: oro_entity.abstract_repository
+        arguments:
+            - 'AmaxLab\Oro\WebStudioBundle\Entity\Credential'
