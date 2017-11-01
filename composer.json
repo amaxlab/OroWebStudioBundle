@@ -12,10 +12,10 @@
     "phpunit/phpunit": "^4.7"
   },
   "autoload": {
-    "psr-4": {"AmaxLab\\Oro\\WebStudioBundle\\": "src"}
+    "psr-4": {"AmaxLab\\Oro\\WebStudioBundle\\": ""}
   },
   "autoload-dev": {
-    "psr-4": {"AmaxLab\\Oro\\WebStudioBundle\\Tests\\": "tests"}
+    "psr-4": {"AmaxLab\\Oro\\WebStudioBundle\\Tests\\": "Tests"}
   },
   "extra": {
     "branch-alias": {
