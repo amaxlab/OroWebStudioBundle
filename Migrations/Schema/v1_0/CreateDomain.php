@@ -19,7 +19,7 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
  */
-class CreateCredentials implements Migration, OrderedMigrationInterface
+class CreateDomain implements Migration, OrderedMigrationInterface
 {
     /**
      * @param Schema   $schema
@@ -29,20 +29,20 @@ class CreateCredentials implements Migration, OrderedMigrationInterface
      */
     public function up(Schema $schema, QueryBag $queries)
     {
-        $table = $schema->createTable('web_studio_credential');
+        $table = $schema->createTable('web_studio_domain');
 
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('username', 'string', ['length' => 255, 'notnull' => false]);
-        $table->addColumn('password', 'string', ['length' => 255, 'notnull' => false]);
-        $table->addColumn('token', 'string', ['length' => 255, 'notnull' => false]);
-        $table->addColumn('comment', 'text', ['notnull' => false]);
+        $table->addColumn('name', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('expired_at', 'date', ['notnull' => false]);
+        $table->addColumn('domain_registrar_id', 'integer', ['notnull' => false]);
         $table->addColumn('user_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
 
+        $table->addIndex(['domain_registrar_id']);
         $table->addIndex(['user_owner_id']);
         $table->addIndex(['organization_id']);
 
+        $table->addForeignKeyConstraint($schema->getTable('web_studio_domain_registrar'), ['domain_registrar_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_user'), ['user_owner_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 
@@ -54,6 +54,6 @@ class CreateCredentials implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 1;
+        return 3;
     }
 }

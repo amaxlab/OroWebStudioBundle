@@ -1,18 +1,23 @@
+parameters:
+    web_studio.credential.entity.class: AmaxLab\Oro\WebStudioBundle\Entity\Credential
+    web_studio.domain_registrar.entity.class: AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar
+    web_studio.domain.entity.class: AmaxLab\Oro\WebStudioBundle\Entity\Domain
+
 services:
     AmaxLab\Oro\WebStudioBundle\Repository\CredentialRepository:
         class: AmaxLab\Oro\WebStudioBundle\Repository\CredentialRepository
         parent: oro_entity.abstract_repository
         arguments:
-            - 'AmaxLab\Oro\WebStudioBundle\Entity\Credential'
+            - '%web_studio.credential.entity.class%'
 
     AmaxLab\Oro\WebStudioBundle\Repository\DomainRepository:
         class: AmaxLab\Oro\WebStudioBundle\Repository\DomainRepository
         parent: oro_entity.abstract_repository
         arguments:
-            - 'AmaxLab\Oro\WebStudioBundle\Entity\Domain'
+            - '%web_studio.domain.entity.class%'
 
     AmaxLab\Oro\WebStudioBundle\Repository\DomainRegistrarRepository:
         class: AmaxLab\Oro\WebStudioBundle\Repository\DomainRegistrarRepository
         parent: oro_entity.abstract_repository
         arguments:
-            - 'AmaxLab\Oro\WebStudioBundle\Entity\Domain'
+            - '%web_studio.domain_registrar.entity.class%'

@@ -1,0 +1,4 @@
+amaxlab_oro_web_studio_bundle:
+    resource:     "@WebStudioBundle/Controller"
+    type:         annotation
+    prefix:       /web_studio

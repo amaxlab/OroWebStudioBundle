@@ -32,8 +32,8 @@ use Oro\Bundle\UserBundle\Entity\User;
  *          },
  *          "security"={
  *              "type"="ACL",
- *              "group_name"="web-studio",
- *              "category"="security"
+ *              "group_name"="",
+ *              "category"="web-studio"
  *          },
  *          "merge"={
  *              "enable"=true

@@ -1,0 +1,35 @@
+navigation:
+    menu_config:
+        items:
+            web_studio_tab:
+                label: 'amaxlab.oro.webstudio.navigation.web_studio_tab'
+                uri: '#'
+                extras:
+                    icon: fa-gear
+            web_studio_domain_management:
+                label: 'amaxlab.oro.webstudio.navigation.web_studio_domain_management'
+                uri: '#'
+                extras:
+                    icon: fa-globe
+            web_studio_domain_registrar_list:
+                label:    'amaxlab.oro.webstudio.domainregistrar.entity_plural_label'
+                route:    'web_studio_domain_registrar_index'
+                extras:
+                    routes: ['web_studio_domain_registrar_*']
+                    description: 'amaxlab.oro.webstudio.domainregistrar.entity_description'
+                    icon: fa-registered
+
+        tree:
+            application_menu:
+                children:
+                    web_studio_tab:
+                        children:
+                            web_studio_domain_management:
+                                children:
+                                    web_studio_domain_registrar_list: ~
+
+    titles:
+        web_studio_domain_registrar_index:  ~
+        web_studio_domain_registrarweb_studio_domain_registrar_update: '%domain_registrar.name% - Edit'
+        web_studio_domain_registrar_create: 'Create Domain Registrar'
+        web_studio_domain_registrar_view: '%domain_registrar.name%'

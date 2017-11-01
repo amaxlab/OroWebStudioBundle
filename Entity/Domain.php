@@ -32,8 +32,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          },
  *          "security"={
  *              "type"="ACL",
- *              "group_name"="web-studio",
- *              "category"="domain"
+ *              "group_name"="",
+ *              "category"="web-studio"
  *          },
  *          "merge"={
  *              "enable"=true
@@ -101,4 +101,112 @@ class Domain extends ExtendDomain
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $organization;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getExpiredAt()
+    {
+        return $this->expiredAt;
+    }
+
+    /**
+     * @param DateTime $expiredAt
+     *
+     * @return $this
+     */
+    public function setExpiredAt($expiredAt)
+    {
+        $this->expiredAt = $expiredAt;
+
+        return $this;
+    }
+
+    /**
+     * @return DomainRegistrar
+     */
+    public function getDomainRegistrar()
+    {
+        return $this->domainRegistrar;
+    }
+
+    /**
+     * @param DomainRegistrar $domainRegistrar
+     *
+     * @return $this
+     */
+    public function setDomainRegistrar($domainRegistrar)
+    {
+        $this->domainRegistrar = $domainRegistrar;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param User $owner
+     *
+     * @return $this
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
+
+    /**
+     * @param Organization $organization
+     *
+     * @return $this
+     */
+    public function setOrganization($organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
 }

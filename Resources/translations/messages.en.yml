@@ -1,8 +1,13 @@
 amaxlab:
     oro:
         webstudio:
+            navigation:
+                web_studio_tab: Web studio
+                web_studio_domain_management: Domain management
             credential:
                 entity_label: Credential
+                entity_plural_label: Credentials
+                entity_description: ""
                 comment.label: Comment
                 expired_at.label: Expired At
                 id.label: ID
@@ -11,3 +16,22 @@ amaxlab:
                 password.label: Password
                 username.label: Username
                 token.label: Token
+            domain:
+                entity_label: Domain
+                entity_plural_label: Domains
+                entity_description: ""
+                id.label: ID
+                name.label: Name
+                domain_registrar.label: Domain registrar
+                expired_at.label: Expired At
+                owner.label: Owner
+                organization.label: Organization
+            domainregistrar:
+                entity_label: Domain Registrar
+                entity_plural_label: Domain registrators
+                entity_description: ""
+                id.label: ID
+                name.label: Name
+                domains.label: Domains
+                owner.label: Owner
+                organization.label: Organization
