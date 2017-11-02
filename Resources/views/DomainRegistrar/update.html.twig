@@ -23,7 +23,7 @@
 {% block navButtons %}
     {% if entityId and is_granted('DELETE', form.vars.value) %}
         {{ UI.deleteButton({
-            'dataUrl': path('web_studio_domain_registrar_view', {'id': entityId}),
+            'dataUrl': path('oro_action_operation_execute', {'operationName': 'DELETE', 'entityId': entity.id, 'entityClass': entityClass}),
             'dataRedirect': path('web_studio_domain_registrar_index'),
             'aCss': 'no-hash remove-button',
             'dataId': entityId,

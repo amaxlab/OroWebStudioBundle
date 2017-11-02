@@ -12,7 +12,7 @@
     {% endif %}
     {% if is_granted('DELETE', entity) %}
         {{ UI.deleteButton({
-            'dataUrl': path('web_studio_domain_registrar_view', {'id': entity.id}),
+            'dataUrl': path('oro_action_operation_execute', {'operationName': 'DELETE', 'entityId': entity.id, 'entityClass': entityClass}),
             'dataRedirect': path('web_studio_domain_registrar_index'),
             'aCss': 'no-hash remove-button',
             'id': 'btn-remove-domain_registrar',

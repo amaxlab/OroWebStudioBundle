@@ -57,6 +57,7 @@ class DomainRegistrarController extends Controller
     {
         return [
             'entity' => $entity,
+            'entityClass' => DomainRegistrar::class,
         ];
     }
 
@@ -124,6 +125,7 @@ class DomainRegistrarController extends Controller
 
         return [
             'entity' => $entity,
+            'entityClass' => DomainRegistrar::class,
             'form' => $this->get('web_studio.form.domain_registrar')->createView(),
         ];
     }
