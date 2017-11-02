@@ -15,7 +15,9 @@ datagrids:
                 select:
                     - dr.id
                     - dr.name
-                    - owner.username as ownerName
+                    - dr.createdAt
+                    - dr.updatedAt
+                    - owner.name as ownerName
                 from:
                     - { table: %web_studio.domain_registrar.entity.class%, alias: dr }
                 join:
@@ -27,6 +29,12 @@ datagrids:
         columns:
             name:
                 label: amaxlab.oro.webstudio.domainregistrar.name.label
+            createdAt:
+                label: oro.ui.created_at
+                frontend_type: datetime
+            updatedAt:
+                label: oro.ui.updated_at
+                frontend_type: datetime
             ownerName:
                 label: amaxlab.oro.webstudio.domainregistrar.owner.label
 
@@ -42,12 +50,6 @@ datagrids:
                 route: web_studio_domain_registrar_view
                 params:
                     - id
-#            delete_link:
-#                type: url
-#                route: oro_api_delete_businessunit
-#                params:
-#                    - id
-
         actions:
             view:
                 type:          navigate
@@ -62,19 +64,16 @@ datagrids:
                 link:          update_link
                 icon:          pencil-square-o
                 acl_resource:  web_studio_domain_registrar_update
-#            delete:
-#                type:          delete
-#                label:         oro.grid.action.delete
-#                link:          delete_link
-#                icon:          trash-o
-#                acl_resource:  web_studio_domain_registrar_delete
-
         sorters:
             columns:
                 name:
                     data_name: dr.name
                 ownerName:
                     data_name: owner.name
+                createdAt:
+                    data_name: dr.createdAt
+                updatedAt:
+                    data_name: dr.updatedAt
 
             default:
                 name: %oro_datagrid.extension.orm_sorter.class%::DIRECTION_ASC
@@ -84,3 +83,15 @@ datagrids:
                 name:
                     type: string
                     data_name: dr.name
+                createdAt:
+                    type: datetime
+                    data_name: dr.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: dr.updatedAt
+                businessUnit:
+                    label: amaxlab.oro.webstudio.domainregistrar.owner.label
+                    type: choice-tree
+                    autocomplete_alias: business_units_tree_search_handler
+                    data_name: dr.owner
+                    className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'

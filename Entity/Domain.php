@@ -16,8 +16,8 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
+use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
-use Oro\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -39,9 +39,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "enable"=true
  *          },
  *          "ownership"={
- *              "owner_type"="USER",
+ *              "owner_type"="BUSINESS_UNIT",
  *              "owner_field_name"="owner",
- *              "owner_column_name"="user_owner_id",
+ *              "owner_column_name"="business_unit_id",
  *              "organization_field_name"="organization",
  *              "organization_column_name"="organization_id"
  *          }
@@ -81,9 +81,9 @@ class Domain extends ExtendDomain
     private $domainRegistrar;
 
     /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_owner_id", referencedColumnName="id", onDelete="SET NULL")
+     * @var BusinessUnit
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
+     * @ORM\JoinColumn(name="business_unit_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $owner;
 
@@ -214,7 +214,7 @@ class Domain extends ExtendDomain
     }
 
     /**
-     * @return User
+     * @return BusinessUnit
      */
     public function getOwner()
     {
@@ -222,7 +222,7 @@ class Domain extends ExtendDomain
     }
 
     /**
-     * @param User $owner
+     * @param BusinessUnit $owner
      *
      * @return $this
      */
