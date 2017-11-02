@@ -12,19 +12,20 @@
 namespace AmaxLab\Oro\WebStudioBundle\Entity;
 
 use AmaxLab\Oro\WebStudioBundle\Model\ExtendDomainRegistrar;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
- *
  * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\DomainRegistrarRepository")
  * @ORM\Table(name="web_studio_domain_registrar")
- *
+ * @ORM\HasLifecycleCallbacks()
  * @Config(
  *      routeName="web_studio_domain_registrar_index",
  *      routeView="web_studio_domain_registrar_view",
@@ -47,6 +48,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "owner_column_name"="user_owner_id",
  *              "organization_field_name"="organization",
  *              "organization_column_name"="organization_id"
+ *          },
+ *          "grid"={
+ *              "default"="web-studio-domain-registrar-grid"
  *          }
  *      }
  * )
@@ -55,7 +59,6 @@ class DomainRegistrar extends ExtendDomainRegistrar
 {
     /**
      * @var int
-     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -64,24 +67,20 @@ class DomainRegistrar extends ExtendDomainRegistrar
 
     /**
      * @var string
-     *
      * @Assert\NotBlank()
      * @Assert\Length(max="255", min="3")
-     *
      * @ORM\Column(name="name", type="string", length=255, nullable=false, unique=true)
      */
     private $name;
 
     /**
      * @var Domain[]
-     *
      * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Domain", mappedBy="domainRegistrar")
      */
     private $domains;
 
     /**
      * @var User
-     *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_owner_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -89,11 +88,36 @@ class DomainRegistrar extends ExtendDomainRegistrar
 
     /**
      * @var Organization
-     *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $organization;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="oro.ui.created_at"
+     *          }
+     *      }
+     * )
+     */
+    private $createdAt;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="updated_at", type="datetime")
+     * @ConfigField(
+     *      defaultValues={
+     *          "entity"={
+     *              "label"="oro.ui.updated_at"
+     *          }
+     *      }
+     * )
+     */
+    private $updatedAt;
 
     /**
      * DomainRegistrar constructor.
@@ -101,6 +125,35 @@ class DomainRegistrar extends ExtendDomainRegistrar
     public function __construct()
     {
         $this->domains = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getName();
+    }
+
+    /**
+     * Pre persist event handler
+     *
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
+        $this->updatedAt = $this->createdAt;
+    }
+
+    /**
+     * Pre update event handler
+     *
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
     }
 
     /**
@@ -187,6 +240,46 @@ class DomainRegistrar extends ExtendDomainRegistrar
     public function setOrganization($organization)
     {
         $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     *
+     * @return $this
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param DateTime $updatedAt
+     *
+     * @return $this
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

@@ -35,6 +35,8 @@ class CreateDomainRegistrar implements Migration, OrderedMigrationInterface
         $table->addColumn('name', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('user_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
+        $table->addColumn('created_at', 'datetime');
+        $table->addColumn('updated_at', 'datetime');
 
         $table->addIndex(['user_owner_id']);
         $table->addIndex(['organization_id']);

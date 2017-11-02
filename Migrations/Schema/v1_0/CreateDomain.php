@@ -37,6 +37,8 @@ class CreateDomain implements Migration, OrderedMigrationInterface
         $table->addColumn('domain_registrar_id', 'integer', ['notnull' => false]);
         $table->addColumn('user_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
+        $table->addColumn('created_at', 'datetime');
+        $table->addColumn('updated_at', 'datetime');
 
         $table->addIndex(['domain_registrar_id']);
         $table->addIndex(['user_owner_id']);
