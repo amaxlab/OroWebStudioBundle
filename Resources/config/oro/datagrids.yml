@@ -95,3 +95,107 @@ datagrids:
                     autocomplete_alias: business_units_tree_search_handler
                     data_name: dr.owner
                     className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
+
+
+    web-studio-domain-grid:
+        acl_resource: true
+        extended_entity_name: AmaxLab\Oro\WebStudioBundle\Entity\Domain
+        options:
+            entityHint: domains
+            entity_pagination: true
+            mass_actions:
+                delete:
+                    enabled: false
+        source:
+            type: orm
+            skip_acl_apply: false
+            query:
+                select:
+                    - d.id
+                    - d.name
+                    - d.expiredAt
+                    - d.createdAt
+                    - d.updatedAt
+                    - owner.name as ownerName
+                    - domainRegistrar.name as domainRegistrarName
+                from:
+                    - { table: AmaxLab\Oro\WebStudioBundle\Entity\Domain, alias: d }
+                join:
+                    left:
+                        domainRegistrar:
+                            join: d.domainRegistrar
+                            alias: domainRegistrar
+                        owner:
+                            join: d.owner
+                            alias: owner
+        columns:
+            name:
+                label: amaxlab.oro.webstudio.domain.name.label
+            expiredAt:
+                label: amaxlab.oro.webstudio.domain.expired_at.label
+                frontend_type: datetime
+            domainRegistrarName:
+                label: amaxlab.oro.webstudio.domain.domain_registrar.label
+            ownerName:
+                label: amaxlab.oro.webstudio.domain.owner.label
+            createdAt:
+                label: oro.ui.created_at
+                frontend_type: datetime
+            updatedAt:
+                label: oro.ui.updated_at
+                frontend_type: datetime
+        properties:
+            id: ~
+            update_link:
+                type: url
+                route: web_studio_domain_update
+                params:
+                    - id
+            view_link:
+                type: url
+                route: web_studio_domain_view
+                params:
+                    - id
+        actions:
+            view:
+                type:          navigate
+                label:         oro.grid.action.view
+                link:          view_link
+                icon:          eye
+                acl_resource:  web_studio_domain_view
+                rowAction:     true
+            update:
+                type:          navigate
+                label:         oro.grid.action.update
+                link:          update_link
+                icon:          pencil-square-o
+                acl_resource:  web_studio_domain_update
+        sorters:
+            columns:
+                name:
+                    data_name: d.name
+                ownerName:
+                    data_name: owner.name
+                createdAt:
+                    data_name: d.createdAt
+                updatedAt:
+                    data_name: d.updatedAt
+            default:
+                name: %oro_datagrid.extension.orm_sorter.class%::DIRECTION_ASC
+        filters:
+            columns:
+                name:
+                    type: string
+                    data_name: d.name
+                createdAt:
+                    type: datetime
+                    data_name: d.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: d.updatedAt
+                businessUnit:
+                    label: amaxlab.oro.webstudio.domain.owner.label
+                    type: choice-tree
+                    autocomplete_alias: business_units_tree_search_handler
+                    data_name: dr.owner
+                    className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'

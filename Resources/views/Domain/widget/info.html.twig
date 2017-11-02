@@ -1,0 +1,15 @@
+{% import 'OroUIBundle::macros.html.twig' as ui %}
+{% import 'OroEmailBundle::macros.html.twig' as email %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+
+<div class="widget-content">
+    <div class="row-fluid form-horizontal">
+        <div class="responsive-block">
+            {{ ui.renderProperty('amaxlab.oro.webstudio.domain.name.label'|trans, entity.name) }}
+            {{ ui.renderProperty('amaxlab.oro.webstudio.domain.domain_registrar.label'|trans, entity.domainRegistrar) }}
+            {{ ui.renderProperty('amaxlab.oro.webstudio.domain.expired_at.label'|trans, entity.expiredAt|date('d.m.Y')) }}
+
+            {{ entityConfig.renderDynamicFields(entity) }}
+        </div>
+    </div>
+</div>

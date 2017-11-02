@@ -1,28 +1,46 @@
-parameters:
-    web_studio.form.type.domain_registrar.class:    AmaxLab\Oro\WebStudioBundle\Form\Type\DomainRegistrarType
-    web_studio.form.handler.domain_registrar.class: AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainRegistrarHandler
-
 services:
     #
     # Domain registrar
     #
     web_studio.form.domain_registrar:
         class:           Symfony\Component\Form\Form
-        factory_method:  createNamed
-        factory_service: form.factory
+        factory: [@form.factory, createNamed]
         arguments:
             - web_studio_domain_registrar_form
-            - %web_studio.form.type.domain_registrar.class%
+            - AmaxLab\Oro\WebStudioBundle\Form\Type\DomainRegistrarType
 
-    web_studio.form.type.domain_registrar:
-        class: %web_studio.form.type.domain_registrar.class%
+    AmaxLab\Oro\WebStudioBundle\Form\Type\DomainRegistrarType:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainRegistrarType
         tags:
-            - { name: form.type, alias: %web_studio.form.type.domain_registrar.class% }
+            - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainRegistrarType }
 
-    web_studio.form.handler.domain_registrar:
-        class: %web_studio.form.handler.domain_registrar.class%
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainRegistrarHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainRegistrarHandler
         scope: request
         arguments:
             - '@web_studio.form.domain_registrar'
+            - '@request'
+            - '@doctrine.orm.entity_manager'
+
+    #
+    # Domain
+    #
+    web_studio.form.domain:
+            class:           Symfony\Component\Form\Form
+            factory: [@form.factory, createNamed]
+            arguments:
+                - web_studio_domain_form
+                - AmaxLab\Oro\WebStudioBundle\Form\Type\DomainType
+
+    AmaxLab\Oro\WebStudioBundle\Form\Type\DomainType:
+            class: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainType
+            tags:
+                - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainType }
+
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainHandler
+        scope: request
+        arguments:
+            - '@web_studio.form.domain'
             - '@request'
             - '@doctrine.orm.entity_manager'

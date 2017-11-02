@@ -75,6 +75,7 @@ class Domain extends ExtendDomain
 
     /**
      * @var DomainRegistrar
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar", inversedBy="domains")
      * @ORM\JoinColumn(name="domain_registrar_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -82,6 +83,7 @@ class Domain extends ExtendDomain
 
     /**
      * @var BusinessUnit
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
      * @ORM\JoinColumn(name="business_unit_id", referencedColumnName="id", onDelete="SET NULL")
      */

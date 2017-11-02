@@ -11,7 +11,7 @@
 
 namespace AmaxLab\Oro\WebStudioBundle\Form\Handler;
 
-use AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar;
+use AmaxLab\Oro\WebStudioBundle\Entity\Domain;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
  */
-class DomainRegistrarHandler
+class DomainHandler
 {
     /**
      * @param FormInterface $form
@@ -36,10 +36,10 @@ class DomainRegistrarHandler
     /**
      * Process form
      *
-     * @param  DomainRegistrar $entity
+     * @param  Domain $entity
      * @return bool
      */
-    public function process(DomainRegistrar $entity)
+    public function process(Domain $entity)
     {
         $this->form->setData($entity);
 

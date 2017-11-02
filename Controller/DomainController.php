@@ -11,8 +11,8 @@
 
 namespace AmaxLab\Oro\WebStudioBundle\Controller;
 
-use AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar;
-use AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainRegistrarHandler;
+use AmaxLab\Oro\WebStudioBundle\Entity\Domain;
+use AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainHandler;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,18 +22,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
  *
- * @Route("domain_registrar")
+ * @Route("domain")
  */
-class DomainRegistrarController extends Controller
+class DomainController extends Controller
 {
     /**
      * @Route(
      *      "/{_format}",
-     *      name="web_studio_domain_registrar_index",
+     *      name="web_studio_domain_index",
      *      requirements={"_format"="html|json"},
      *      defaults={"_format" = "html"}
      * )
-     * @AclAncestor("web_studio_domain_registrar_view")
+     * @AclAncestor("web_studio_domain_view")
      * @Template
      * @return array
      */
@@ -43,33 +43,33 @@ class DomainRegistrarController extends Controller
     }
 
     /**
-     * @Route("/view/{id}", name="web_studio_domain_registrar_view", requirements={"id"="\d+"})
+     * @Route("/view/{id}", name="web_studio_domain_view", requirements={"id"="\d+"})
      * @Template
      * @Acl(
-     *      id="web_studio_domain_registrar_view",
+     *      id="web_studio_domian_view",
      *      type="entity",
-     *      class="WebStudioBundle:DomainRegistrar",
+     *      class="WebStudioBundle:Domain",
      *      permission="VIEW"
      * )
-     * @param DomainRegistrar $entity
+     * @param Domain $entity
      * @return array
      */
-    public function viewAction(DomainRegistrar $entity)
+    public function viewAction(Domain $entity)
     {
         return [
             'entity' => $entity,
-            'entityClass' => DomainRegistrar::class,
+            'entityClass' => Domain::class,
         ];
     }
 
     /**
-     * @Route("/widget/info/{id}", name="web_studio_domain_registrar_widget_info", requirements={"id"="\d+"})
-     * @Template("WebStudioBundle:DomainRegistrar/widget:info.html.twig")
-     * @AclAncestor("web_studio_domain_registrar_view")
-     * @param DomainRegistrar $entity
+     * @Route("/widget/info/{id}", name="web_studio_domain_widget_info", requirements={"id"="\d+"})
+     * @Template("WebStudioBundle:Domain/widget:info.html.twig")
+     * @AclAncestor("web_studio_domain_view")
+     * @param Domain $entity
      * @return array
      */
-    public function infoAction(DomainRegistrar $entity)
+    public function infoAction(Domain $entity)
     {
         return [
             'entity' => $entity,
@@ -77,45 +77,45 @@ class DomainRegistrarController extends Controller
     }
 
     /**
-     * @Route("/create", name="web_studio_domain_registrar_create")
-     * @Template("WebStudioBundle:DomainRegistrar:update.html.twig")
+     * @Route("/create", name="web_studio_domain_create")
+     * @Template("WebStudioBundle:Domain:update.html.twig")
      * @Acl(
-     *      id="web_studio_domain_registrar_create",
+     *      id="web_studio_domain_create",
      *      type="entity",
-     *      class="WebStudioBundle:DomainRegistrar",
+     *      class="WebStudioBundle:Domain",
      *      permission="CREATE"
      * )
      * @return array
      */
     public function createAction()
     {
-        return $this->update(new DomainRegistrar());
+        return $this->update(new Domain());
     }
 
     /**
-     * @Route("/update/{id}", name="web_studio_domain_registrar_update", requirements={"id"="\d+"}, defaults={"id"=0})
+     * @Route("/update/{id}", name="web_studio_domain_update", requirements={"id"="\d+"}, defaults={"id"=0})
      * @Template
      * @Acl(
-     *      id="web_studio_domain_registrar_update",
+     *      id="web_studio_domain_update",
      *      type="entity",
-     *      class="WebStudioBundle:DomainRegistrar",
+     *      class="WebStudioBundle:Domain",
      *      permission="EDIT"
      * )
-     * @param DomainRegistrar $entity
+     * @param Domain $entity
      * @return array
      */
-    public function updateAction(DomainRegistrar $entity)
+    public function updateAction(Domain $entity)
     {
         return $this->update($entity);
     }
 
     /**
-     * @param DomainRegistrar $entity
+     * @param Domain $entity
      * @return array
      */
-    protected function update(DomainRegistrar $entity)
+    protected function update(Domain $entity)
     {
-        if ($this->get(DomainRegistrarHandler::class)->process($entity)) {
+        if ($this->get(DomainHandler::class)->process($entity)) {
             $this->get('session')->getFlashBag()->add(
                 'success',
                 $this->get('translator')->trans('oro.business_unit.controller.message.saved') //TODO:change this
@@ -126,8 +126,8 @@ class DomainRegistrarController extends Controller
 
         return [
             'entity' => $entity,
-            'entityClass' => DomainRegistrar::class,
-            'form' => $this->get('web_studio.form.domain_registrar')->createView(),
+            'entityClass' => Domain::class,
+            'form' => $this->get('web_studio.form.domain')->createView(),
         ];
     }
 }

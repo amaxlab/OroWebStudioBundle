@@ -81,6 +81,7 @@ class DomainRegistrar extends ExtendDomainRegistrar
 
     /**
      * @var BusinessUnit
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
      * @ORM\JoinColumn(name="business_unit_id", referencedColumnName="id", onDelete="SET NULL")
      */
