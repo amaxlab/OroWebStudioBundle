@@ -33,15 +33,15 @@ class CreateDomainRegistrar implements Migration, OrderedMigrationInterface
 
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('name', 'string', ['length' => 255, 'notnull' => false]);
-        $table->addColumn('business_unit_id', 'integer', ['notnull' => false]);
+        $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
         $table->addColumn('created_at', 'datetime');
         $table->addColumn('updated_at', 'datetime');
 
-        $table->addIndex(['business_unit_id']);
+        $table->addIndex(['business_unit_owner_id']);
         $table->addIndex(['organization_id']);
 
-        $table->addForeignKeyConstraint($schema->getTable('oro_business_unit'), ['business_unit_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
+        $table->addForeignKeyConstraint($schema->getTable('oro_business_unit'), ['business_unit_owner_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 
         $table->setPrimaryKey(['id']);

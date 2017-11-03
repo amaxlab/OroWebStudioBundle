@@ -15,10 +15,12 @@ use AmaxLab\Oro\WebStudioBundle\Model\ExtendDomainRegistrar;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
+use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -45,7 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "ownership"={
  *              "owner_type"="BUSINESS_UNIT",
  *              "owner_field_name"="owner",
- *              "owner_column_name"="business_unit_id",
+ *              "owner_column_name"="business_unit_owner_id",
  *              "organization_field_name"="organization",
  *              "organization_column_name"="organization_id"
  *          },
@@ -57,6 +59,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class DomainRegistrar extends ExtendDomainRegistrar
 {
+    use BusinessUnitAwareTrait, DatesAwareTrait;
+
     /**
      * @var int
      * @ORM\Id
@@ -78,47 +82,6 @@ class DomainRegistrar extends ExtendDomainRegistrar
      * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Domain", mappedBy="domainRegistrar")
      */
     private $domains;
-
-    /**
-     * @var BusinessUnit
-     * @Assert\NotBlank()
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
-     * @ORM\JoinColumn(name="business_unit_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $owner;
-
-    /**
-     * @var Organization
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $organization;
-
-    /**
-     * @var DateTime
-     * @ORM\Column(name="created_at", type="datetime")
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="oro.ui.created_at"
-     *          }
-     *      }
-     * )
-     */
-    private $createdAt;
-
-    /**
-     * @var DateTime
-     * @ORM\Column(name="updated_at", type="datetime")
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="oro.ui.updated_at"
-     *          }
-     *      }
-     * )
-     */
-    private $updatedAt;
 
     /**
      * DomainRegistrar constructor.
@@ -201,86 +164,6 @@ class DomainRegistrar extends ExtendDomainRegistrar
     public function setDomains($domains)
     {
         $this->domains = $domains;
-
-        return $this;
-    }
-
-    /**
-     * @return BusinessUnit
-     */
-    public function getOwner()
-    {
-        return $this->owner;
-    }
-
-    /**
-     * @param BusinessUnit $owner
-     *
-     * @return $this
-     */
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * @return Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
-
-    /**
-     * @param Organization $organization
-     *
-     * @return $this
-     */
-    public function setOrganization($organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param DateTime $createdAt
-     *
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param DateTime $updatedAt
-     *
-     * @return $this
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
