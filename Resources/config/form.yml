@@ -90,3 +90,26 @@ services:
             - '@web_studio.form.host_provider'
             - '@request'
             - '@doctrine.orm.entity_manager'
+
+    #
+    # Host
+    #
+    web_studio.form.host:
+        class:           Symfony\Component\Form\Form
+        factory: [@form.factory, createNamed]
+        arguments:
+            - web_studio_host_form
+            - AmaxLab\Oro\WebStudioBundle\Form\Type\HostType
+
+    AmaxLab\Oro\WebStudioBundle\Form\Type\HostType:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Type\HostType
+        tags:
+            - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\HostType }
+
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\HostHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\HostHandler
+        scope: request
+        arguments:
+            - '@web_studio.form.host'
+            - '@request'
+            - '@doctrine.orm.entity_manager'

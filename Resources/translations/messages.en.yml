@@ -15,6 +15,19 @@ amaxlab:
                 owner.label: Owner
                 organization.label: Organization
 
+            host:
+                entity_label: Host
+                entity_plural_label: Hosts
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                host_provider.label: Host provider
+                os.label: OS
+                cpu.label: CPU
+                memory.label: Memory
+                organization.label: Organization
+                owner.label: Owner
+
             credential:
                 entity_label: Credential
                 entity_plural_label: Credentials

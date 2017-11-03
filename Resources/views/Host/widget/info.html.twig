@@ -1,0 +1,19 @@
+{% import 'OroUIBundle::macros.html.twig' as ui %}
+{% import 'OroEmailBundle::macros.html.twig' as email %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+
+<div class="widget-content">
+    <div class="row-fluid form-horizontal">
+        <div class="responsive-block">
+            {{ ui.renderProperty('amaxlab.oro.webstudio.host.name.label'|trans, entity.name) }}
+            {{ ui.renderProperty('amaxlab.oro.webstudio.host.host_provider.label'|trans, entity.hostProvider) }}
+
+            {{ entityConfig.renderDynamicFields(entity) }}
+        </div>
+        <div class="responsive-block">
+            {{ ui.renderProperty('amaxlab.oro.webstudio.host.os.label'|trans, entity.os) }}
+            {{ ui.renderProperty('amaxlab.oro.webstudio.host.cpu.label'|trans, entity.cpu) }}
+            {{ ui.renderProperty('amaxlab.oro.webstudio.host.memory.label'|trans, entity.memory) }}
+        </div>
+    </div>
+</div>

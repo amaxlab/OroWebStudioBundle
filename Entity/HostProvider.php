@@ -16,6 +16,7 @@ use AmaxLab\Oro\WebStudioBundle\EntityProperty\IdAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\NameAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\Model\ExtendHostProvider;
 use AmaxLab\Oro\WebStudioBundle\Model\ExtendSite;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
@@ -54,4 +55,38 @@ use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 class HostProvider extends ExtendHostProvider
 {
     use IdAwareTrait, NameAwareTrait, BusinessUnitAwareTrait, DatesAwareTrait;
+
+    /**
+     * @var Host[]
+     * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Host", mappedBy="hostProvider")
+     */
+    private $hosts;
+
+    /**
+     * HostProvider constructor.
+     */
+    public function __construct()
+    {
+        $this->hosts = new ArrayCollection();
+    }
+
+    /**
+     * @return Host[]
+     */
+    public function getHosts()
+    {
+        return $this->hosts;
+    }
+
+    /**
+     * @param Host[] $hosts
+     *
+     * @return $this
+     */
+    public function setHosts($hosts)
+    {
+        $this->hosts = $hosts;
+
+        return $this;
+    }
 }
