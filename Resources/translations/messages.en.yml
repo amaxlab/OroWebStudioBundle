@@ -10,7 +10,7 @@ amaxlab:
                 entity_description: ""
                 comment.label: Comment
                 expired_at.label: Expired At
-                id.label: ID
+                id.label: Id
                 organization.label: Organization
                 owner.label: Owner
                 password.label: Password
@@ -20,7 +20,7 @@ amaxlab:
                 entity_label: Domain
                 entity_plural_label: Domains
                 entity_description: ""
-                id.label: ID
+                id.label: Id
                 name.label: Name
                 domain_registrar.label: Domain registrar
                 expired_at.label: Expired At
@@ -30,8 +30,17 @@ amaxlab:
                 entity_label: Domain Registrar
                 entity_plural_label: Domain registrators
                 entity_description: ""
-                id.label: ID
+                id.label: Id
                 name.label: Name
                 domains.label: Domains
+                owner.label: Owner
+                organization.label: Organization
+            site:
+                entity_label: Site
+                entity_plural_label: Sites
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                domain.label: Domain
                 owner.label: Owner
                 organization.label: Organization

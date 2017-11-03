@@ -14,32 +14,26 @@ namespace AmaxLab\Oro\WebStudioBundle\Entity;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\DatesAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\IdAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\NameAwareTrait;
-use AmaxLab\Oro\WebStudioBundle\Model\ExtendDomainRegistrar;
-use Doctrine\Common\Collections\ArrayCollection;
+use AmaxLab\Oro\WebStudioBundle\Model\ExtendSite;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
- * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\DomainRegistrarRepository")
- * @ORM\Table(name="web_studio_domain_registrar")
+ * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\SiteRepository")
+ * @ORM\Table(name="web_studio_site")
  * @ORM\HasLifecycleCallbacks()
  * @Config(
- *      routeName="web_studio_domain_registrar_index",
- *      routeView="web_studio_domain_registrar_view",
- *      routeCreate="web_studio_domain_registrar_create",
  *      defaultValues={
  *          "entity"={
- *              "icon"="fa-registered"
+ *              "icon"="fa-wordpress"
  *          },
  *          "security"={
  *              "type"="ACL",
  *              "group_name"="",
  *              "category"="web-studio"
- *          },
- *          "merge"={
- *              "enable"=true
  *          },
  *          "ownership"={
  *              "owner_type"="BUSINESS_UNIT",
@@ -47,47 +41,38 @@ use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
  *              "owner_column_name"="business_unit_owner_id",
  *              "organization_field_name"="organization",
  *              "organization_column_name"="organization_id"
- *          },
- *          "grid"={
- *              "default"="web-studio-domain-registrar-grid"
  *          }
  *      }
  * )
  */
-class DomainRegistrar extends ExtendDomainRegistrar
+class Site extends ExtendSite
 {
     use IdAwareTrait, NameAwareTrait, BusinessUnitAwareTrait, DatesAwareTrait;
 
     /**
-     * @var Domain[]
-     * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Domain", mappedBy="domainRegistrar")
+     * @var Domain
+     * @Assert\NotBlank()
+     * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Domain", inversedBy="sites")
+     * @ORM\JoinColumn(name="domain_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $domains;
+    private $domain;
 
     /**
-     * DomainRegistrar constructor.
+     * @return Domain
      */
-    public function __construct()
+    public function getDomain()
     {
-        $this->domains = new ArrayCollection();
+        return $this->domain;
     }
 
     /**
-     * @return Domain[]
-     */
-    public function getDomains()
-    {
-        return $this->domains;
-    }
-
-    /**
-     * @param Domain[] $domains
+     * @param Domain $domain
      *
      * @return $this
      */
-    public function setDomains($domains)
+    public function setDomain($domain)
     {
-        $this->domains = $domains;
+        $this->domain = $domain;
 
         return $this;
     }

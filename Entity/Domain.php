@@ -11,10 +11,13 @@
 
 namespace AmaxLab\Oro\WebStudioBundle\Entity;
 
+use AmaxLab\Oro\WebStudioBundle\EntityProperty\DatesAwareTrait;
+use AmaxLab\Oro\WebStudioBundle\EntityProperty\IdAwareTrait;
+use AmaxLab\Oro\WebStudioBundle\EntityProperty\NameAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\Model\ExtendDomain;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -49,27 +52,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Domain extends ExtendDomain
 {
-    use BusinessUnitAwareTrait, DatesAwareTrait;
-
-    /**
-     * @var int
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\Length(max="255", min="3")
-     * @ORM\Column(name="name", type="string", length=255, nullable=false, unique=true)
-     */
-    private $name;
+    use IdAwareTrait, NameAwareTrait, BusinessUnitAwareTrait, DatesAwareTrait;
 
     /**
      * @var DateTime
      * @Assert\NotBlank()
+     * @Assert\Date()
      * @ORM\Column(name="expired_at", type="date", nullable=false)
      */
     private $expiredAt;
@@ -83,56 +71,17 @@ class Domain extends ExtendDomain
     private $domainRegistrar;
 
     /**
-     * @return string
+     * @var Site[]
+     * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Site", mappedBy="domain")
      */
-    public function __toString()
-    {
-        return (string) $this->getName();
-    }
+    private $sites;
 
     /**
-     * @ORM\PrePersist()
+     * Domain constructor.
      */
-    public function prePersist()
+    public function __construct()
     {
-        $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
-        $this->updatedAt = $this->createdAt;
-    }
-
-    /**
-     * @ORM\PreUpdate()
-     */
-    public function preUpdate()
-    {
-        $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
+        $this->sites = new ArrayCollection();
     }
 
     /**
@@ -171,6 +120,26 @@ class Domain extends ExtendDomain
     public function setDomainRegistrar($domainRegistrar)
     {
         $this->domainRegistrar = $domainRegistrar;
+
+        return $this;
+    }
+
+    /**
+     * @return Site[]
+     */
+    public function getSites()
+    {
+        return $this->sites;
+    }
+
+    /**
+     * @param Site[] $sites
+     *
+     * @return $this
+     */
+    public function setSites($sites)
+    {
+        $this->sites = $sites;
 
         return $this;
     }

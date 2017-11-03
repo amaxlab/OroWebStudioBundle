@@ -44,3 +44,26 @@ services:
             - '@web_studio.form.domain'
             - '@request'
             - '@doctrine.orm.entity_manager'
+
+    #
+    # Site
+    #
+    web_studio.form.site:
+        class:           Symfony\Component\Form\Form
+        factory: [@form.factory, createNamed]
+        arguments:
+            - web_studio_site_form
+            - AmaxLab\Oro\WebStudioBundle\Form\Type\SiteType
+
+    AmaxLab\Oro\WebStudioBundle\Form\Type\SiteType:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Type\SiteType
+        tags:
+            - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\SiteType }
+
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\SiteHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\SiteHandler
+        scope: request
+        arguments:
+            - '@web_studio.form.site'
+            - '@request'
+            - '@doctrine.orm.entity_manager'

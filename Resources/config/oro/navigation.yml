@@ -25,7 +25,13 @@ navigation:
                     routes: ['web_studio_domain_*']
                     description: 'amaxlab.oro.webstudio.domain.entity_description'
                     icon: fa-globe
-
+            web_studio_site_list:
+                label:    'amaxlab.oro.webstudio.site.entity_plural_label'
+                route:    'web_studio_site_index'
+                extras:
+                    routes: ['web_studio_site_*']
+                    description: 'amaxlab.oro.webstudio.site.entity_description'
+                    icon: fa-wordpress
         tree:
             application_menu:
                 children:
@@ -35,7 +41,7 @@ navigation:
                                 children:
                                     web_studio_domain_registrar_list: ~
                                     web_studio_domain_list: ~
-
+                            web_studio_site_list: ~
     titles:
         web_studio_domain_index:  ~
         web_studio_domain_update: '%domain.name% - Edit'
@@ -46,3 +52,8 @@ navigation:
         web_studio_domain_registrar_update: '%domain_registrar.name% - Edit'
         web_studio_domain_registrar_create: 'Create Domain Registrar'
         web_studio_domain_registrar_view: '%domain_registrar.name%'
+
+        web_studio_site_index:  ~
+        web_studio_site_update: '%site.name% - Edit'
+        web_studio_site_create: 'Create Site'
+        web_studio_site_view: '%site.name%'

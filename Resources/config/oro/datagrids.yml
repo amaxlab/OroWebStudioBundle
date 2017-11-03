@@ -199,3 +199,102 @@ datagrids:
                     autocomplete_alias: business_units_tree_search_handler
                     data_name: dr.owner
                     className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
+
+    web-studio-site-grid:
+        acl_resource: true
+        extended_entity_name: AmaxLab\Oro\WebStudioBundle\Entity\Site
+        options:
+            entityHint: sites
+            entity_pagination: true
+            mass_actions:
+                delete:
+                    enabled: false
+        source:
+            type: orm
+            skip_acl_apply: false
+            query:
+                select:
+                    - s.id
+                    - s.name
+                    - s.createdAt
+                    - s.updatedAt
+                    - owner.name as ownerName
+                    - domain.name as domainName
+                from:
+                    - { table: AmaxLab\Oro\WebStudioBundle\Entity\Site, alias: s }
+                join:
+                    left:
+                        siteRegistrar:
+                            join: s.domain
+                            alias: domain
+                        owner:
+                            join: s.owner
+                            alias: owner
+        columns:
+            name:
+                label: amaxlab.oro.webstudio.site.name.label
+            domainName:
+                label: amaxlab.oro.webstudio.site.domain.label
+            ownerName:
+                label: amaxlab.oro.webstudio.site.owner.label
+            createdAt:
+                label: oro.ui.created_at
+                frontend_type: datetime
+            updatedAt:
+                label: oro.ui.updated_at
+                frontend_type: datetime
+        properties:
+            id: ~
+            update_link:
+                type: url
+                route: web_studio_site_update
+                params:
+                    - id
+            view_link:
+                type: url
+                route: web_studio_site_view
+                params:
+                    - id
+        actions:
+            view:
+                type:          navigate
+                label:         oro.grid.action.view
+                link:          view_link
+                icon:          eye
+                acl_resource:  web_studio_site_view
+                rowAction:     true
+            update:
+                type:          navigate
+                label:         oro.grid.action.update
+                link:          update_link
+                icon:          pencil-square-o
+                acl_resource:  web_studio_site_update
+        sorters:
+            columns:
+                name:
+                    data_name: s.name
+                ownerName:
+                    data_name: owner.name
+                createdAt:
+                    data_name: s.createdAt
+                updatedAt:
+                    data_name: s.updatedAt
+            default:
+                name: %oro_datagrid.extension.orm_sorter.class%::DIRECTION_ASC
+        filters:
+            columns:
+                name:
+                    type: string
+                    data_name: s.name
+                createdAt:
+                    type: datetime
+                    data_name: s.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: s.updatedAt
+                businessUnit:
+                    label: amaxlab.oro.webstudio.site.owner.label
+                    type: choice-tree
+                    autocomplete_alias: business_units_tree_search_handler
+                    data_name: dr.owner
+                    className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
