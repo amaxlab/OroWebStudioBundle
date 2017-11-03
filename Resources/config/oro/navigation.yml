@@ -4,39 +4,57 @@ navigation:
             web_studio_tab:
                 label: 'amaxlab.oro.webstudio.navigation.web_studio_tab'
                 uri: '#'
-                extras:
-                    icon: fa-gear
-            web_studio_domain_management:
-                label: 'amaxlab.oro.webstudio.navigation.web_studio_domain_management'
+#                extras:
+#                    icon: fa-gear
+            web_studio_host_management:
+                label: 'amaxlab.oro.webstudio.navigation.host_management'
                 uri: '#'
+#                extras:
+#                    icon: fa-globe
+            web_studio_domain_management:
+                label: 'amaxlab.oro.webstudio.navigation.domain_management'
+                uri: '#'
+#                extras:
+#                    icon: fa-globe
+
+            web_studio_host_provider_list:
+                label:    'amaxlab.oro.webstudio.hostprovider.entity_plural_label'
+                route:    'web_studio_host_provider_index'
                 extras:
-                    icon: fa-globe
+                    routes: ['web_studio_domain_*']
+                    description: 'amaxlab.oro.webstudio.hostprovider.entity_description'
+#                    icon: fa-globe
+
+
             web_studio_domain_registrar_list:
                 label:    'amaxlab.oro.webstudio.domainregistrar.entity_plural_label'
                 route:    'web_studio_domain_registrar_index'
                 extras:
                     routes: ['web_studio_domain_registrar_*']
                     description: 'amaxlab.oro.webstudio.domainregistrar.entity_description'
-                    icon: fa-registered
+#                    icon: fa-registered
             web_studio_domain_list:
                 label:    'amaxlab.oro.webstudio.domain.entity_plural_label'
                 route:    'web_studio_domain_index'
                 extras:
                     routes: ['web_studio_domain_*']
                     description: 'amaxlab.oro.webstudio.domain.entity_description'
-                    icon: fa-globe
+#                    icon: fa-globe
             web_studio_site_list:
                 label:    'amaxlab.oro.webstudio.site.entity_plural_label'
                 route:    'web_studio_site_index'
                 extras:
                     routes: ['web_studio_site_*']
                     description: 'amaxlab.oro.webstudio.site.entity_description'
-                    icon: fa-wordpress
+#                    icon: fa-wordpress
         tree:
             application_menu:
                 children:
                     web_studio_tab:
                         children:
+                            web_studio_host_management:
+                                children:
+                                    web_studio_host_provider_list: ~
                             web_studio_domain_management:
                                 children:
                                     web_studio_domain_registrar_list: ~
@@ -57,3 +75,8 @@ navigation:
         web_studio_site_update: '%site.name% - Edit'
         web_studio_site_create: 'Create Site'
         web_studio_site_view: '%site.name%'
+
+        web_studio_host_provider_index:  ~
+        web_studio_host_provider_update: '%host_provider.name% - Edit'
+        web_studio_host_provider_create: 'Create Host Provider'
+        web_studio_host_provider_view: '%host_provider.name%'

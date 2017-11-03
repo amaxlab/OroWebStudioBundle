@@ -28,6 +28,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="web_studio_domain")
  * @ORM\HasLifecycleCallbacks()
  * @Config(
+ *      routeName="web_studio_domain_index",
+ *      routeView="web_studio_domain_view",
+ *      routeCreate="web_studio_domain_create",
  *      defaultValues={
  *          "entity"={
  *              "icon"="fa-globe"
@@ -46,6 +49,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "owner_column_name"="business_unit_owner_id",
  *              "organization_field_name"="organization",
  *              "organization_column_name"="organization_id"
+ *          },
+ *          "grid"={
+ *              "default"="web-studio-domain-grid"
  *          }
  *      }
  * )

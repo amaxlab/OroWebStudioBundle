@@ -14,24 +14,24 @@ namespace AmaxLab\Oro\WebStudioBundle\Entity;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\DatesAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\IdAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\NameAwareTrait;
+use AmaxLab\Oro\WebStudioBundle\Model\ExtendHostProvider;
 use AmaxLab\Oro\WebStudioBundle\Model\ExtendSite;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
- * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\SiteRepository")
- * @ORM\Table(name="web_studio_site")
+ * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\HostProviderRepository")
+ * @ORM\Table(name="web_studio_host_provider")
  * @ORM\HasLifecycleCallbacks()
  * @Config(
- *      routeName="web_studio_site_index",
- *      routeView="web_studio_site_view",
- *      routeCreate="web_studio_site_create",
+ *      routeName="web_studio_host_provider_index",
+ *      routeView="web_studio_host_provider_view",
+ *      routeCreate="web_studio_host_provider_create",
  *      defaultValues={
  *          "entity"={
- *              "icon"="fa-wordpress"
+ *              "icon"="fa-truck"
  *          },
  *          "security"={
  *              "type"="ACL",
@@ -46,40 +46,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "organization_column_name"="organization_id"
  *          },
  *          "grid"={
- *              "default"="web-studio-site-grid"
+ *              "default"="web-studio-host-provider-grid"
  *          }
  *      }
  * )
  */
-class Site extends ExtendSite
+class HostProvider extends ExtendHostProvider
 {
     use IdAwareTrait, NameAwareTrait, BusinessUnitAwareTrait, DatesAwareTrait;
-
-    /**
-     * @var Domain
-     * @Assert\NotBlank()
-     * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Domain", inversedBy="sites")
-     * @ORM\JoinColumn(name="domain_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $domain;
-
-    /**
-     * @return Domain
-     */
-    public function getDomain()
-    {
-        return $this->domain;
-    }
-
-    /**
-     * @param Domain $domain
-     *
-     * @return $this
-     */
-    public function setDomain($domain)
-    {
-        $this->domain = $domain;
-
-        return $this;
-    }
 }

@@ -19,7 +19,7 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
  */
-class CreateDomain implements Migration, OrderedMigrationInterface
+class CreateHostProvider implements Migration, OrderedMigrationInterface
 {
     /**
      * @param Schema   $schema
@@ -29,22 +29,18 @@ class CreateDomain implements Migration, OrderedMigrationInterface
      */
     public function up(Schema $schema, QueryBag $queries)
     {
-        $table = $schema->createTable('web_studio_domain');
+        $table = $schema->createTable('web_studio_host_provider');
 
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('name', 'string', ['length' => 255, 'notnull' => true]);
-        $table->addColumn('expired_at', 'date', ['notnull' => true]);
-        $table->addColumn('domain_registrar_id', 'integer', ['notnull' => true]);
         $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => true]);
         $table->addColumn('organization_id', 'integer', ['notnull' => true]);
         $table->addColumn('created_at', 'datetime');
         $table->addColumn('updated_at', 'datetime');
 
-        $table->addIndex(['domain_registrar_id']);
         $table->addIndex(['business_unit_owner_id']);
         $table->addIndex(['organization_id']);
 
-        $table->addForeignKeyConstraint($schema->getTable('web_studio_domain_registrar'), ['domain_registrar_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_business_unit'), ['business_unit_owner_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 
@@ -56,6 +52,6 @@ class CreateDomain implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 5;
     }
 }
