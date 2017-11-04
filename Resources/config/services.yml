@@ -39,3 +39,15 @@ services:
         parent: oro_entity.abstract_repository
         arguments:
             - AmaxLab\Oro\WebStudioBundle\Entity\Host
+
+    AmaxLab\Oro\WebStudioBundle\Repository\EnvironmentRepository:
+        class: AmaxLab\Oro\WebStudioBundle\Repository\EnvironmentRepository
+        parent: oro_entity.abstract_repository
+        arguments:
+            - AmaxLab\Oro\WebStudioBundle\Entity\Environment
+
+    AmaxLab\Oro\WebStudioBundle\Repository\ApplicationRepository:
+        class: AmaxLab\Oro\WebStudioBundle\Repository\ApplicationRepository
+        parent: oro_entity.abstract_repository
+        arguments:
+            - AmaxLab\Oro\WebStudioBundle\Entity\Application

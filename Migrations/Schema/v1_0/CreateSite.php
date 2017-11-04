@@ -43,7 +43,7 @@ class CreateSite implements Migration, OrderedMigrationInterface
         $table->addIndex(['business_unit_owner_id']);
         $table->addIndex(['organization_id']);
 
-        $table->addForeignKeyConstraint($schema->getTable('web_studio_domain'), ['domain_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
+        $table->addForeignKeyConstraint($schema->getTable('web_studio_domain'), ['domain_id'], ['id'], ['onDelete' => 'restrict', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_business_unit'), ['business_unit_owner_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 

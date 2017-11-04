@@ -14,7 +14,8 @@ namespace AmaxLab\Oro\WebStudioBundle\Entity;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\DatesAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\IdAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\NameAwareTrait;
-use AmaxLab\Oro\WebStudioBundle\Model\ExtendSite;
+use AmaxLab\Oro\WebStudioBundle\Model\ExtendEnvironment;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
@@ -22,16 +23,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
- * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\SiteRepository")
- * @ORM\Table(name="web_studio_site")
+ * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\EnvironmentRepository")
+ * @ORM\Table(name="web_studio_environment")
  * @ORM\HasLifecycleCallbacks()
  * @Config(
- *      routeName="web_studio_site_index",
- *      routeView="web_studio_site_view",
- *      routeCreate="web_studio_site_create",
  *      defaultValues={
  *          "entity"={
- *              "icon"="fa-wordpress"
+ *              "icon"="fa-cubes"
  *          },
  *          "security"={
  *              "type"="ACL",
@@ -46,39 +44,73 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "organization_column_name"="organization_id"
  *          },
  *          "grid"={
- *              "default"="web-studio-site-grid"
+ *              "default"="web-studio-environment-grid"
  *          }
  *      }
  * )
  */
-class Site extends ExtendSite
+class Environment extends ExtendEnvironment
 {
     use IdAwareTrait, NameAwareTrait, BusinessUnitAwareTrait, DatesAwareTrait;
 
     /**
-     * @var Domain
+     * @var Project
      * @Assert\NotBlank()
-     * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Domain", inversedBy="sites")
-     * @ORM\JoinColumn(name="domain_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Project", inversedBy="environments")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false)
      */
-    private $domain;
+    private $project;
 
     /**
-     * @return Domain
+     * @var Application
+     * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Application", mappedBy="environment")
      */
-    public function getDomain()
+    private $applications;
+
+    /**
+     * Environment constructor.
+     */
+    public function __construct()
     {
-        return $this->domain;
+        $this->applications = new ArrayCollection();
     }
 
     /**
-     * @param Domain $domain
+     * @return Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param Project $project
      *
      * @return $this
      */
-    public function setDomain($domain)
+    public function setProject($project)
     {
-        $this->domain = $domain;
+        $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * @return Application
+     */
+    public function getApplications()
+    {
+        return $this->applications;
+    }
+
+    /**
+     * @param Application $applications
+     *
+     * @return $this
+     */
+    public function setApplications($applications)
+    {
+        $this->applications = $applications;
 
         return $this;
     }

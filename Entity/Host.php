@@ -59,7 +59,7 @@ class Host extends ExtendHost
      * @var HostProvider
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\HostProvider", inversedBy="hosts")
-     * @ORM\JoinColumn(name="host_provider_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="host_provider_id", referencedColumnName="id", nullable=false)
      */
     private $hostProvider;
 

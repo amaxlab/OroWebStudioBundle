@@ -6,6 +6,35 @@ amaxlab:
                 host_management: Host management
                 domain_management: Domain management
 
+            project:
+                entity_label: Project
+                entity_plural_label: Projects
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                owner.label: Owner
+                organization.label: Organization
+
+            environment:
+                entity_label: Environment
+                entity_plural_label: Environments
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                project.label: Project
+                owner.label: Owner
+                organization.label: Organization
+
+            application:
+                entity_label: Application
+                entity_plural_label: Applications
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                environment.label: Environment
+                owner.label: Owner
+                organization.label: Organization
+
             hostprovider:
                 entity_label: Host provider
                 entity_plural_label: Host providers
