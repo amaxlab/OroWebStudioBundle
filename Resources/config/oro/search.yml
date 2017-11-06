@@ -26,6 +26,34 @@ search:
                 name:                   name
                 target_type:            text
                 target_fields:          [name]
+                
+    AmaxLab\Oro\WebStudioBundle\Entity\DomainMailService:
+        alias:                          web_studio_domain_mail_service
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_domain_mail_service_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
+
+    AmaxLab\Oro\WebStudioBundle\Entity\DomainDnsService:
+        alias:                          web_studio_domain_dns_service
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_domain_dns_service_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
 
     AmaxLab\Oro\WebStudioBundle\Entity\Domain:
         alias:                          web_studio_domain

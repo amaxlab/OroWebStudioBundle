@@ -46,6 +46,29 @@ services:
             - '@doctrine.orm.entity_manager'
 
     #
+    # Domain dns service
+    #
+    web_studio.form.domain_dns_service:
+        class:           Symfony\Component\Form\Form
+        factory: [@form.factory, createNamed]
+        arguments:
+            - web_studio_domain_dns_service_form
+            - AmaxLab\Oro\WebStudioBundle\Form\Type\DomainDnsServiceType
+
+    AmaxLab\Oro\WebStudioBundle\Form\Type\DomainDns_serviceType:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainDnsServiceType
+        tags:
+            - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainDnsServiceType }
+
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainDns_serviceHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainDnsServiceHandler
+        scope: request
+        arguments:
+            - '@web_studio.form.domain_dns_service'
+            - '@request'
+            - '@doctrine.orm.entity_manager'
+
+    #
     # Domain
     #
     web_studio.form.domain:

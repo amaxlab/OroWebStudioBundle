@@ -14,7 +14,7 @@ namespace AmaxLab\Oro\WebStudioBundle\Entity;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\DatesAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\IdAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\NameAwareTrait;
-use AmaxLab\Oro\WebStudioBundle\Model\ExtendRole;
+use AmaxLab\Oro\WebStudioBundle\Model\ExtendDomainDnsService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
@@ -22,21 +22,24 @@ use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
- * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\RoleRepository")
- * @ORM\Table(name="web_studio_role")
+ * @ORM\Entity(repositoryClass="AmaxLab\Oro\WebStudioBundle\Repository\DomainDnsServiceRepository")
+ * @ORM\Table(name="web_studio_domain_dns_service")
  * @ORM\HasLifecycleCallbacks()
  * @Config(
- *      routeName="web_studio_role_index",
- *      routeView="web_studio_role_view",
- *      routeCreate="web_studio_role_create",
+ *      routeName="web_studio_domain_dns_service_index",
+ *      routeView="web_studio_domain_dns_service_view",
+ *      routeCreate="web_studio_domain_dns_service_create",
  *      defaultValues={
  *          "entity"={
- *              "icon"="fa-bolt"
+ *              "icon"="fa-wrench"
  *          },
  *          "security"={
  *              "type"="ACL",
  *              "group_name"="",
  *              "category"="web-studio"
+ *          },
+ *          "merge"={
+ *              "enable"=true
  *          },
  *          "ownership"={
  *              "owner_type"="BUSINESS_UNIT",
@@ -46,46 +49,45 @@ use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
  *              "organization_column_name"="organization_id"
  *          },
  *          "grid"={
- *              "default"="web-studio-role-grid"
+ *              "default"="web-studio-domain-dns-service-grid"
  *          }
  *      }
  * )
  */
-class Role extends ExtendRole
+class DomainDnsService extends ExtendDomainDnsService
 {
     use IdAwareTrait, NameAwareTrait, BusinessUnitAwareTrait, DatesAwareTrait;
 
     /**
-     * @var Host[]
-     * @ORM\ManyToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Host", mappedBy="roles")
-     * @ORM\JoinTable(name="web_studio_host_roles")
+     * @var Domain[]
+     * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Domain", mappedBy="domainDnsService")
      */
-    private $hosts;
+    private $domains;
 
     /**
-     * Role constructor.
+     * DomainDns_service constructor.
      */
     public function __construct()
     {
-        $this->hosts = new ArrayCollection();
+        $this->domains = new ArrayCollection();
     }
 
     /**
-     * @return Host[]
+     * @return Domain[]
      */
-    public function getHosts()
+    public function getDomains()
     {
-        return $this->hosts;
+        return $this->domains;
     }
 
     /**
-     * @param Host[] $hosts
+     * @param Domain[] $domains
      *
      * @return $this
      */
-    public function setHosts($hosts)
+    public function setDomains($domains)
     {
-        $this->hosts = $hosts;
+        $this->domains = $domains;
 
         return $this;
     }

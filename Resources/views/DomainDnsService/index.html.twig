@@ -1,0 +1,13 @@
+{% extends 'OroUIBundle:actions:index.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% set gridName = 'web-studio-domain-dns-service-grid' %}
+{% set pageTitle = 'amaxlab.oro.webstudio.domaindnsservice.entity_plural_label'|trans %}
+
+{% block navButtons %}
+    {% if is_granted('web_studio_domain_dns_service_create') %}
+        {{ UI.addButton({
+            'path': path('web_studio_domain_dns_service_create'),
+            'entity_label': 'amaxlab.oro.webstudio.domaindnsservice.entity_label'|trans
+        }) }}
+    {% endif %}
+{% endblock %}

@@ -12,6 +12,7 @@ amaxlab:
                 entity_description: ""
                 id.label: Id
                 name.label: Name
+                environments.label: Environments
                 owner.label: Owner
                 organization.label: Organization
 
@@ -22,6 +23,7 @@ amaxlab:
                 id.label: Id
                 name.label: Name
                 project.label: Project
+                applications.label: Applications
                 owner.label: Owner
                 organization.label: Organization
 
@@ -41,6 +43,7 @@ amaxlab:
                 entity_description: ""
                 id.label: Id
                 name.label: Name
+                hosts.label: Hosts
                 owner.label: Owner
                 organization.label: Organization
 
@@ -79,6 +82,9 @@ amaxlab:
                 id.label: Id
                 name.label: Name
                 domain_registrar.label: Domain registrar
+                domain_dns_service.label: DNS service
+                domain_mail_service.label: Mail service
+                sites.label: Sites
                 expired_at.label: Expired At
                 owner.label: Owner
                 organization.label: Organization
@@ -96,6 +102,16 @@ amaxlab:
             domainmailservice:
                 entity_label: Domain Mail Service
                 entity_plural_label: Domain mail services
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                domains.label: Domains
+                owner.label: Owner
+                organization.label: Organization
+
+            domaindnsservice:
+                entity_label: Domain Dns Service
+                entity_plural_label: Domain dns services
                 entity_description: ""
                 id.label: Id
                 name.label: Name

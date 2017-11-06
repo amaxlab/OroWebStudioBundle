@@ -84,6 +84,13 @@ class Domain extends ExtendDomain
     private $domainMailService;
 
     /**
+     * @var DomainDnsService
+     * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\DomainDnsService", inversedBy="domains")
+     * @ORM\JoinColumn(name="domain_dns_service_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $domainDnsService;
+
+    /**
      * @var Site[]
      * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Site", mappedBy="domain")
      */
@@ -173,6 +180,26 @@ class Domain extends ExtendDomain
     public function setDomainMailService($domainMailService)
     {
         $this->domainMailService = $domainMailService;
+
+        return $this;
+    }
+
+    /**
+     * @return DomainDnsService
+     */
+    public function getDomainDnsService()
+    {
+        return $this->domainDnsService;
+    }
+
+    /**
+     * @param DomainDnsService $domainDnsService
+     *
+     * @return $this
+     */
+    public function setDomainDnsService($domainDnsService)
+    {
+        $this->domainDnsService = $domainDnsService;
 
         return $this;
     }

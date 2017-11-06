@@ -36,6 +36,12 @@ navigation:
                 extras:
                     routes: ['web_studio_domain_mail_service_*']
                     description: 'amaxlab.oro.webstudio.domainmailservice.entity_description'
+            web_studio_domain_dns_service_list:
+                label:    'amaxlab.oro.webstudio.domaindnsservice.entity_plural_label'
+                route:    'web_studio_domain_dns_service_index'
+                extras:
+                    routes: ['web_studio_domain_dns_service_*']
+                    description: 'amaxlab.oro.webstudio.domaindnsservice.entity_description'
             web_studio_domain_list:
                 label:    'amaxlab.oro.webstudio.domain.entity_plural_label'
                 route:    'web_studio_domain_index'
@@ -75,6 +81,7 @@ navigation:
                                 children:
                                     web_studio_domain_registrar_list: ~
                                     web_studio_domain_mail_service_list: ~
+                                    web_studio_domain_dns_service_list: ~
                                     web_studio_domain_list: ~
                             web_studio_site_list: ~
                             web_studio_project_list: ~
@@ -93,6 +100,11 @@ navigation:
         web_studio_domain_mail_service_update: '%domain_mail_service.name% - Edit'
         web_studio_domain_mail_service_create: 'Create Domain Mail Service'
         web_studio_domain_mail_service_view: '%domain_mail_service.name%'
+
+        web_studio_domain_dns_service_index:  ~
+        web_studio_domain_dns_service_update: '%domain_dns_service.name% - Edit'
+        web_studio_domain_dns_service_create: 'Create Domain Dns Service'
+        web_studio_domain_dns_service_view: '%domain_dns_service.name%'
 
         web_studio_site_index:  ~
         web_studio_site_update: '%site.name% - Edit'
