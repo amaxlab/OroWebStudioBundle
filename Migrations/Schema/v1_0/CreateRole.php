@@ -19,7 +19,7 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
  */
-class CreateApplication implements Migration, OrderedMigrationInterface
+class CreateRole implements Migration, OrderedMigrationInterface
 {
     /**
      * @param Schema   $schema
@@ -29,21 +29,18 @@ class CreateApplication implements Migration, OrderedMigrationInterface
      */
     public function up(Schema $schema, QueryBag $queries)
     {
-        $table = $schema->createTable('web_studio_application');
+        $table = $schema->createTable('web_studio_role');
 
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('name', 'string', ['length' => 255, 'notnull' => true]);
-        $table->addColumn('environment_id', 'integer', ['notnull' => true]);
         $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
         $table->addColumn('created_at', 'datetime');
         $table->addColumn('updated_at', 'datetime');
 
-        $table->addIndex(['environment_id']);
         $table->addIndex(['business_unit_owner_id']);
         $table->addIndex(['organization_id']);
 
-        $table->addForeignKeyConstraint($schema->getTable('web_studio_environment'), ['environment_id'], ['id'], ['onDelete' => 'restrict', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_business_unit'), ['business_unit_owner_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 
@@ -55,6 +52,6 @@ class CreateApplication implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 100;
+        return 50;
     }
 }

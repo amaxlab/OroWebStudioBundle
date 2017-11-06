@@ -52,6 +52,6 @@ class CreateProject implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 7;
+        return 80;
     }
 }

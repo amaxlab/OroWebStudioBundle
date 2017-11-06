@@ -52,6 +52,6 @@ class CreateHostProvider implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 5;
+        return 60;
     }
 }

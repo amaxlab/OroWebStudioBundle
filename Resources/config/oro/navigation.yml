@@ -42,6 +42,18 @@ navigation:
                 extras:
                     routes: ['web_studio_site_*']
                     description: 'amaxlab.oro.webstudio.site.entity_description'
+            web_studio_role_list:
+                label:    'amaxlab.oro.webstudio.role.entity_plural_label'
+                route:    'web_studio_role_index'
+                extras:
+                    routes: ['web_studio_role_*']
+                    description: 'amaxlab.oro.webstudio.role.entity_description'
+            web_studio_project_list:
+                label:    'amaxlab.oro.webstudio.project.entity_plural_label'
+                route:    'web_studio_project_index'
+                extras:
+                    routes: ['web_studio_project_*']
+                    description: 'amaxlab.oro.webstudio.project.entity_description'
 
         tree:
             application_menu:
@@ -51,12 +63,14 @@ navigation:
                             web_studio_host_management:
                                 children:
                                     web_studio_host_provider_list: ~
+                                    web_studio_role_list: ~
                                     web_studio_host_list: ~
                             web_studio_domain_management:
                                 children:
                                     web_studio_domain_registrar_list: ~
                                     web_studio_domain_list: ~
                             web_studio_site_list: ~
+                            web_studio_project_list: ~
     titles:
         web_studio_domain_index:  ~
         web_studio_domain_update: '%domain.name% - Edit'
@@ -73,6 +87,11 @@ navigation:
         web_studio_site_create: 'Create Site'
         web_studio_site_view: '%site.name%'
 
+        web_studio_role_index:  ~
+        web_studio_role_update: '%role.name% - Edit'
+        web_studio_role_create: 'Create Role'
+        web_studio_role_view: '%role.name%'
+
         web_studio_host_provider_index:  ~
         web_studio_host_provider_update: '%host_provider.name% - Edit'
         web_studio_host_provider_create: 'Create Host Provider'
@@ -82,3 +101,8 @@ navigation:
         web_studio_host_update: '%host.name% - Edit'
         web_studio_host_create: 'Create Host'
         web_studio_host_view: '%host.name%'
+
+        web_studio_project_index:  ~
+        web_studio_project_update: '%project.name% - Edit'
+        web_studio_project_create: 'Create Project'
+        web_studio_project_view: '%project.name%'

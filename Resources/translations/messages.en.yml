@@ -54,6 +54,8 @@ amaxlab:
                 os.label: OS
                 cpu.label: CPU
                 memory.label: Memory
+                hdd.label: HDD
+                roles.label: Roles
                 organization.label: Organization
                 owner.label: Owner
 
@@ -98,5 +100,15 @@ amaxlab:
                 id.label: Id
                 name.label: Name
                 domain.label: Domain
+                owner.label: Owner
+                organization.label: Organization
+
+            role:
+                entity_label: Role (host)
+                entity_plural_label: Roles (host)
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                hosts.label: Hosts
                 owner.label: Owner
                 organization.label: Organization

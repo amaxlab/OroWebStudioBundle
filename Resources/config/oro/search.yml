@@ -1,0 +1,98 @@
+search:
+    AmaxLab\Oro\WebStudioBundle\Entity\Project:
+        alias:                          web_studio_project
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_project_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
+
+    AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar:
+        alias:                          web_studio_domain_registrar
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_domain_registrar_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
+
+    AmaxLab\Oro\WebStudioBundle\Entity\Domain:
+        alias:                          web_studio_domain
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_domain_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
+
+    AmaxLab\Oro\WebStudioBundle\Entity\Site:
+        alias:                          web_studio_site
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_site_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
+
+    AmaxLab\Oro\WebStudioBundle\Entity\Role:
+        alias:                          web_studio_role
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_role_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
+
+    AmaxLab\Oro\WebStudioBundle\Entity\Host:
+        alias:                          web_studio_host
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_host_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]
+
+    AmaxLab\Oro\WebStudioBundle\Entity\HostProvider:
+        alias:                          web_studio_host_provider
+        search_template:                WebStudioBundle:Search:result.html.twig
+        title_fields:                   [name]
+        route:
+            name:                       web_studio_host_provider_view
+            parameters:
+                id:                     id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]

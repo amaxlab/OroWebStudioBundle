@@ -15,6 +15,7 @@ use AmaxLab\Oro\WebStudioBundle\EntityProperty\DatesAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\IdAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\EntityProperty\NameAwareTrait;
 use AmaxLab\Oro\WebStudioBundle\Model\ExtendHost;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
@@ -64,6 +65,13 @@ class Host extends ExtendHost
     private $hostProvider;
 
     /**
+     * @var Role[]
+     * @ORM\ManyToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\Role", inversedBy="hosts")
+     * @ORM\JoinTable(name="web_studio_host_roles")
+     */
+    private $roles;
+
+    /**
      * @var string
      * @ORM\Column(name="os", type="string", length=255, nullable=true)
      */
@@ -80,6 +88,40 @@ class Host extends ExtendHost
      * @ORM\Column(name="memory", type="integer", nullable=true)
      */
     private $memory;
+
+    /**
+     * @var int
+     * @ORM\Column(name="hdd", type="integer", nullable=true)
+     */
+    private $hdd;
+
+    /**
+     * Host constructor.
+     */
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
+
+    /**
+     * @return Role[]
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param Role[] $roles
+     *
+     * @return $this
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
 
     /**
      * @return HostProvider
@@ -157,6 +199,26 @@ class Host extends ExtendHost
     public function setMemory($memory)
     {
         $this->memory = $memory;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHdd()
+    {
+        return $this->hdd;
+    }
+
+    /**
+     * @param int $hdd
+     *
+     * @return $this
+     */
+    public function setHdd($hdd)
+    {
+        $this->hdd = $hdd;
 
         return $this;
     }

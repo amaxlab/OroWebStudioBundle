@@ -37,6 +37,7 @@ class CreateHost implements Migration, OrderedMigrationInterface
         $table->addColumn('os', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('cpu', 'integer', ['notnull' => false]);
         $table->addColumn('memory', 'integer', ['notnull' => false]);
+        $table->addColumn('hdd', 'integer', ['notnull' => false]);
         $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
         $table->addColumn('created_at', 'datetime');
@@ -51,6 +52,17 @@ class CreateHost implements Migration, OrderedMigrationInterface
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 
         $table->setPrimaryKey(['id']);
+
+        $table = $schema->createTable('web_studio_host_roles');
+        $table->addColumn('host_id', 'integer', ['notnull' => true]);
+        $table->addColumn('role_id', 'integer', ['notnull' => true]);
+
+        $table->addIndex(['host_id']);
+        $table->addIndex(['role_id']);
+        $table->addIndex(['host_id', 'role_id']);
+
+        $table->addForeignKeyConstraint($schema->getTable('web_studio_host'), ['host_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => null]);
+        $table->addForeignKeyConstraint($schema->getTable('web_studio_role'), ['role_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => null]);
     }
 
     /**
@@ -58,6 +70,6 @@ class CreateHost implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 6;
+        return 70;
     }
 }

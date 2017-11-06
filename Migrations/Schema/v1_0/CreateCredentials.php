@@ -54,6 +54,6 @@ class CreateCredentials implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 }

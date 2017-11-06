@@ -113,3 +113,49 @@ services:
             - '@web_studio.form.host'
             - '@request'
             - '@doctrine.orm.entity_manager'
+            
+    #
+    # Project
+    #
+    web_studio.form.project:
+        class:           Symfony\Component\Form\Form
+        factory: [@form.factory, createNamed]
+        arguments:
+            - web_studio_project_form
+            - AmaxLab\Oro\WebStudioBundle\Form\Type\ProjectType
+
+    AmaxLab\Oro\WebStudioBundle\Form\Type\ProjectType:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Type\ProjectType
+        tags:
+            - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\ProjectType }
+
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\ProjectHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\ProjectHandler
+        scope: request
+        arguments:
+            - '@web_studio.form.project'
+            - '@request'
+            - '@doctrine.orm.entity_manager'
+            
+    #
+    # Role
+    #
+    web_studio.form.role:
+        class:           Symfony\Component\Form\Form
+        factory: [@form.factory, createNamed]
+        arguments:
+            - web_studio_role_form
+            - AmaxLab\Oro\WebStudioBundle\Form\Type\RoleType
+
+    AmaxLab\Oro\WebStudioBundle\Form\Type\RoleType:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Type\RoleType
+        tags:
+            - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\RoleType }
+
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\RoleHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\RoleHandler
+        scope: request
+        arguments:
+            - '@web_studio.form.role'
+            - '@request'
+            - '@doctrine.orm.entity_manager'

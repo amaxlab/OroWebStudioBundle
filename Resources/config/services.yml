@@ -28,6 +28,12 @@ services:
         arguments:
             - AmaxLab\Oro\WebStudioBundle\Entity\Site
 
+    AmaxLab\Oro\WebStudioBundle\Repository\RoleRepository:
+        class: AmaxLab\Oro\WebStudioBundle\Repository\RoleRepository
+        parent: oro_entity.abstract_repository
+        arguments:
+            - AmaxLab\Oro\WebStudioBundle\Entity\Role
+
     AmaxLab\Oro\WebStudioBundle\Repository\HostProviderRepository:
         class: AmaxLab\Oro\WebStudioBundle\Repository\HostProviderRepository
         parent: oro_entity.abstract_repository

@@ -55,6 +55,6 @@ class CreateEnvironment implements Migration, OrderedMigrationInterface
      */
     public function getOrder()
     {
-        return 8;
+        return 90;
     }
 }
