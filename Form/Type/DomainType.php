@@ -31,6 +31,7 @@ class DomainType extends AbstractType
             ->add('name')
             ->add('expiredAt')
             ->add('owner')
+            ->add('domainMailService')
         ;
     }
 

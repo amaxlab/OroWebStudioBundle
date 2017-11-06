@@ -59,7 +59,7 @@ class CreateHost implements Migration, OrderedMigrationInterface
 
         $table->addIndex(['host_id']);
         $table->addIndex(['role_id']);
-        $table->addIndex(['host_id', 'role_id']);
+        $table->setPrimaryKey(['host_id', 'role_id']);
 
         $table->addForeignKeyConstraint($schema->getTable('web_studio_host'), ['host_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('web_studio_role'), ['role_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => null]);

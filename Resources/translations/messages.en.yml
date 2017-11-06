@@ -93,6 +93,16 @@ amaxlab:
                 owner.label: Owner
                 organization.label: Organization
 
+            domainmailservice:
+                entity_label: Domain Mail Service
+                entity_plural_label: Domain mail services
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                domains.label: Domains
+                owner.label: Owner
+                organization.label: Organization
+
             site:
                 entity_label: Site
                 entity_plural_label: Sites

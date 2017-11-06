@@ -11,7 +11,7 @@
 
 namespace AmaxLab\Oro\WebStudioBundle\Form\Type;
 
-use AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar;
+use AmaxLab\Oro\WebStudioBundle\Entity\DomainMailService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
  */
-class DomainRegistrarType extends AbstractType
+class DomainMailServiceType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ class DomainRegistrarType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DomainRegistrar::class,
+            'data_class' => DomainMailService::class,
         ]);
     }
 }

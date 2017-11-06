@@ -23,6 +23,29 @@ services:
             - '@doctrine.orm.entity_manager'
 
     #
+    # Domain mail service
+    #
+    web_studio.form.domain_mail_service:
+        class:           Symfony\Component\Form\Form
+        factory: [@form.factory, createNamed]
+        arguments:
+            - web_studio_domain_mail_service_form
+            - AmaxLab\Oro\WebStudioBundle\Form\Type\DomainMailServiceType
+
+    AmaxLab\Oro\WebStudioBundle\Form\Type\DomainMail_serviceType:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainMailServiceType
+        tags:
+            - { name: form.type, alias: AmaxLab\Oro\WebStudioBundle\Form\Type\DomainMailServiceType }
+
+    AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainMail_serviceHandler:
+        class: AmaxLab\Oro\WebStudioBundle\Form\Handler\DomainMailServiceHandler
+        scope: request
+        arguments:
+            - '@web_studio.form.domain_mail_service'
+            - '@request'
+            - '@doctrine.orm.entity_manager'
+
+    #
     # Domain
     #
     web_studio.form.domain:

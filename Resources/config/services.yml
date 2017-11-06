@@ -22,6 +22,12 @@ services:
         arguments:
             - '%web_studio.domain_registrar.entity.class%'
 
+    AmaxLab\Oro\WebStudioBundle\Repository\DomainMailServiceRepository:
+        class: AmaxLab\Oro\WebStudioBundle\Repository\DomainMailServiceRepository
+        parent: oro_entity.abstract_repository
+        arguments:
+            - AmaxLab\Oro\WebStudioBundle\Entity\DomainMailService
+
     AmaxLab\Oro\WebStudioBundle\Repository\SiteRepository:
         class: AmaxLab\Oro\WebStudioBundle\Repository\SiteRepository
         parent: oro_entity.abstract_repository

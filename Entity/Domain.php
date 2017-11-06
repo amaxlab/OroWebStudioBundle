@@ -72,9 +72,16 @@ class Domain extends ExtendDomain
      * @var DomainRegistrar
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar", inversedBy="domains")
-     * @ORM\JoinColumn(name="domain_registrar_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="domain_registrar_id", referencedColumnName="id", nullable=false)
      */
     private $domainRegistrar;
+
+    /**
+     * @var DomainMailService
+     * @ORM\ManyToOne(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\DomainMailService", inversedBy="domains")
+     * @ORM\JoinColumn(name="domain_mail_service_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $domainMailService;
 
     /**
      * @var Site[]
@@ -146,6 +153,26 @@ class Domain extends ExtendDomain
     public function setSites($sites)
     {
         $this->sites = $sites;
+
+        return $this;
+    }
+
+    /**
+     * @return DomainMailService
+     */
+    public function getDomainMailService()
+    {
+        return $this->domainMailService;
+    }
+
+    /**
+     * @param DomainMailService $domainMailService
+     *
+     * @return $this
+     */
+    public function setDomainMailService($domainMailService)
+    {
+        $this->domainMailService = $domainMailService;
 
         return $this;
     }

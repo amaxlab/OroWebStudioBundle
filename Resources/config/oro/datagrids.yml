@@ -1,7 +1,10 @@
 datagrids:
+    #
+    # Domain registrar
+    #
     web-studio-domain-registrar-grid:
         acl_resource: true
-        extended_entity_name: %web_studio.domain_registrar.entity.class%
+        extended_entity_name: AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar
         options:
             entityHint: domain registrators
             entity_pagination: true
@@ -19,13 +22,12 @@ datagrids:
                     - dr.updatedAt
                     - owner.name as ownerName
                 from:
-                    - { table: %web_studio.domain_registrar.entity.class%, alias: dr }
+                    - { table: AmaxLab\Oro\WebStudioBundle\Entity\DomainRegistrar, alias: dr }
                 join:
                     left:
                         owner:
                             join: dr.owner
                             alias: owner
-
         columns:
             name:
                 label: amaxlab.oro.webstudio.domainregistrar.name.label
@@ -37,7 +39,6 @@ datagrids:
                 frontend_type: datetime
             ownerName:
                 label: amaxlab.oro.webstudio.domainregistrar.owner.label
-
         properties:
             id: ~
             update_link:
@@ -77,7 +78,6 @@ datagrids:
 
             default:
                 name: %oro_datagrid.extension.orm_sorter.class%::DIRECTION_ASC
-
         filters:
             columns:
                 name:
@@ -96,7 +96,106 @@ datagrids:
                     data_name: dr.owner
                     className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
 
+    #
+    # Domain mail service
+    #
+    web-studio-domain-mail-service-grid:
+        acl_resource: true
+        extended_entity_name: AmaxLab\Oro\WebStudioBundle\Entity\DomainMailService
+        options:
+            entityHint: domain registrators
+            entity_pagination: true
+            mass_actions:
+                delete:
+                    enabled: false
+        source:
+            type: orm
+            skip_acl_apply: false
+            query:
+                select:
+                    - dms.id
+                    - dms.name
+                    - dms.createdAt
+                    - dms.updatedAt
+                    - owner.name as ownerName
+                from:
+                    - { table: AmaxLab\Oro\WebStudioBundle\Entity\DomainMailService, alias: dms }
+                join:
+                    left:
+                        owner:
+                            join: dms.owner
+                            alias: owner
+        columns:
+            name:
+                label: amaxlab.oro.webstudio.domainmailservice.name.label
+            createdAt:
+                label: oro.ui.created_at
+                frontend_type: datetime
+            updatedAt:
+                label: oro.ui.updated_at
+                frontend_type: datetime
+            ownerName:
+                label: amaxlab.oro.webstudio.domainmailservice.owner.label
+        properties:
+            id: ~
+            update_link:
+                type: url
+                route: web_studio_domain_mail_service_update
+                params:
+                    - id
+            view_link:
+                type: url
+                route: web_studio_domain_mail_service_view
+                params:
+                    - id
+        actions:
+            view:
+                type:          navigate
+                label:         oro.grid.action.view
+                link:          view_link
+                icon:          eye
+                acl_resource:  web_studio_domain_mail_service_view
+                rowAction:     true
+            update:
+                type:          navigate
+                label:         oro.grid.action.update
+                link:          update_link
+                icon:          pencil-square-o
+                acl_resource:  web_studio_domain_mail_service_update
+        sorters:
+            columns:
+                name:
+                    data_name: dms.name
+                ownerName:
+                    data_name: owner.name
+                createdAt:
+                    data_name: dms.createdAt
+                updatedAt:
+                    data_name: dms.updatedAt
 
+            default:
+                name: %oro_datagrid.extension.orm_sorter.class%::DIRECTION_ASC
+        filters:
+            columns:
+                name:
+                    type: string
+                    data_name: dms.name
+                createdAt:
+                    type: datetime
+                    data_name: dms.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: dms.updatedAt
+                businessUnit:
+                    label: amaxlab.oro.webstudio.domainmailservice.owner.label
+                    type: choice-tree
+                    autocomplete_alias: business_units_tree_search_handler
+                    data_name: dms.owner
+                    className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
+
+    #
+    # Domain
+    #
     web-studio-domain-grid:
         acl_resource: true
         extended_entity_name: AmaxLab\Oro\WebStudioBundle\Entity\Domain
