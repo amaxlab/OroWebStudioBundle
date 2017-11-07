@@ -129,6 +129,17 @@ amaxlab:
                 owner.label: Owner
                 organization.label: Organization
 
+            mailbox:
+                entity_label: Mail box
+                entity_plural_label: Mail boxes
+                entity_description: ""
+                id.label: Id
+                name.label: Name
+                password.label: Password
+                domain.label: Domain
+                owner.label: Owner
+                organization.label: Organization
+
             role:
                 entity_label: Role (host)
                 entity_plural_label: Roles (host)

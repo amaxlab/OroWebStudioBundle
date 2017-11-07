@@ -97,11 +97,18 @@ class Domain extends ExtendDomain
     private $sites;
 
     /**
+     * @var MailBox[]
+     * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\MailBox", mappedBy="domain")
+     */
+    private $mailBoxes;
+
+    /**
      * Domain constructor.
      */
     public function __construct()
     {
         $this->sites = new ArrayCollection();
+        $this->mailBoxes = new ArrayCollection();
     }
 
     /**
@@ -200,6 +207,26 @@ class Domain extends ExtendDomain
     public function setDomainDnsService($domainDnsService)
     {
         $this->domainDnsService = $domainDnsService;
+
+        return $this;
+    }
+
+    /**
+     * @return MailBox[]
+     */
+    public function getMailBoxes()
+    {
+        return $this->mailBoxes;
+    }
+
+    /**
+     * @param MailBox[] $mailBoxes
+     *
+     * @return $this
+     */
+    public function setMailBoxes($mailBoxes)
+    {
+        $this->mailBoxes = $mailBoxes;
 
         return $this;
     }

@@ -34,6 +34,12 @@ services:
         arguments:
             - AmaxLab\Oro\WebStudioBundle\Entity\DomainDnsService
 
+    AmaxLab\Oro\WebStudioBundle\Repository\MailBoxRepository:
+        class: AmaxLab\Oro\WebStudioBundle\Repository\MailBoxRepository
+        parent: oro_entity.abstract_repository
+        arguments:
+            - AmaxLab\Oro\WebStudioBundle\Entity\MailBox
+
     AmaxLab\Oro\WebStudioBundle\Repository\SiteRepository:
         class: AmaxLab\Oro\WebStudioBundle\Repository\SiteRepository
         parent: oro_entity.abstract_repository

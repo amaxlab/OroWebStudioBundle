@@ -398,6 +398,109 @@ datagrids:
                     data_name: dr.owner
                     className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
 
+
+    #
+    # Mail box
+    #
+    web-studio-mail-box-grid:
+        acl_resource: true
+        extended_entity_name: AmaxLab\Oro\WebStudioBundle\Entity\MailBox
+        options:
+            entityHint: mail boxes
+            entity_pagination: true
+            mass_actions:
+                delete:
+                    enabled: false
+        source:
+            type: orm
+            skip_acl_apply: false
+            query:
+                select:
+                    - mb.id
+                    - mb.name
+                    - mb.createdAt
+                    - mb.updatedAt
+                    - owner.name as ownerName
+                    - domain.name as domainName
+                from:
+                    - { table: AmaxLab\Oro\WebStudioBundle\Entity\MailBox, alias: mb }
+                join:
+                    left:
+                        mailBoxRegistrar:
+                            join: mb.domain
+                            alias: domain
+                        owner:
+                            join: mb.owner
+                            alias: owner
+        columns:
+            name:
+                label: amaxlab.oro.webstudio.mailBox.name.label
+            domainName:
+                label: amaxlab.oro.webstudio.mailBox.domain.label
+            ownerName:
+                label: amaxlab.oro.webstudio.mailBox.owner.label
+            createdAt:
+                label: oro.ui.created_at
+                frontend_type: datetime
+            updatedAt:
+                label: oro.ui.updated_at
+                frontend_type: datetime
+        properties:
+            id: ~
+            update_link:
+                type: url
+                route: web_studio_mailBox_update
+                params:
+                    - id
+            view_link:
+                type: url
+                route: web_studio_mailBox_view
+                params:
+                    - id
+        actions:
+            view:
+                type:          navigate
+                label:         oro.grid.action.view
+                link:          view_link
+                icon:          eye
+                acl_resource:  web_studio_mailBox_view
+                rowAction:     true
+            update:
+                type:          navigate
+                label:         oro.grid.action.update
+                link:          update_link
+                icon:          pencil-square-o
+                acl_resource:  web_studio_mailBox_update
+        sorters:
+            columns:
+                name:
+                    data_name: mb.name
+                ownerName:
+                    data_name: owner.name
+                createdAt:
+                    data_name: mb.createdAt
+                updatedAt:
+                    data_name: mb.updatedAt
+            default:
+                name: %oro_datagrid.extension.orm_sorter.class%::DIRECTION_ASC
+        filters:
+            columns:
+                name:
+                    type: string
+                    data_name: mb.name
+                createdAt:
+                    type: datetime
+                    data_name: mb.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: mb.updatedAt
+                businessUnit:
+                    label: amaxlab.oro.webstudio.mailBox.owner.label
+                    type: choice-tree
+                    autocomplete_alias: business_units_tree_search_handler
+                    data_name: mb.owner
+                    className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
+
     #
     # Site
     #
@@ -497,7 +600,7 @@ datagrids:
                     label: amaxlab.oro.webstudio.site.owner.label
                     type: choice-tree
                     autocomplete_alias: business_units_tree_search_handler
-                    data_name: dr.owner
+                    data_name: s.owner
                     className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
 
     #
