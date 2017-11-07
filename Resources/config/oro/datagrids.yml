@@ -992,3 +992,119 @@ datagrids:
                     autocomplete_alias: business_units_tree_search_handler
                     data_name: dr.owner
                     className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
+                                    
+    #
+    # Credential
+    #
+    web-studio-credential-grid:
+        acl_resource: true
+        extended_entity_name: AmaxLab\Oro\WebStudioBundle\Entity\Credential
+        options:
+            entityHint: credentials
+            entity_pagination: true
+            mass_actions:
+                delete:
+                    enabled: false
+        source:
+            type: orm
+            skip_acl_apply: false
+            query:
+                select:
+                    - c.id
+                    - c.username
+                    - c.password
+                    - c.expiredAt
+                    - c.comment
+                    - c.createdAt
+                    - c.updatedAt
+                    - owner.name as ownerName
+                from:
+                    - { table: AmaxLab\Oro\WebStudioBundle\Entity\Credential, alias: c }
+                join:
+                    left:
+                        owner:
+                            join: c.owner
+                            alias: owner
+        columns:
+            username:
+                label: amaxlab.oro.webstudio.credential.name.label
+            password:
+                label: amaxlab.oro.webstudio.credential.password.label
+            expiredAt:
+                label: amaxlab.oro.webstudio.credential.expired_at.label
+                frontend_type: date
+            comment:
+                label: amaxlab.oro.webstudio.credential.comment.label
+            ownerName:
+                label: amaxlab.oro.webstudio.credential.owner.label
+            createdAt:
+                label: oro.ui.created_at
+                frontend_type: datetime
+            updatedAt:
+                label: oro.ui.updated_at
+                frontend_type: datetime
+        properties:
+            id: ~
+            update_link:
+                type: url
+                route: web_studio_credential_update
+                params:
+                    - id
+            view_link:
+                type: url
+                route: web_studio_credential_view
+                params:
+                    - id
+        actions:
+            view:
+                type:          navigate
+                label:         oro.grid.action.view
+                link:          view_link
+                icon:          eye
+                acl_resource:  web_studio_credential_view
+                rowAction:     true
+            update:
+                type:          navigate
+                label:         oro.grid.action.update
+                link:          update_link
+                icon:          pencil-square-o
+                acl_resource:  web_studio_credential_update
+        sorters:
+            columns:
+                username:
+                    data_name: c.username
+                expiredAt:
+                    data_name: c.expiredAt
+                ownerName:
+                    data_name: owner.name
+                createdAt:
+                    data_name: r.createdAt
+                updatedAt:
+                    data_name: r.updatedAt
+            default:
+                username: %oro_datagrid.extension.orm_sorter.class%::DIRECTION_ASC
+        filters:
+            columns:
+                username:
+                    type: string
+                    data_name: c.username
+                expiredAt:
+                    type: date
+                    data_name: c.expiredAt
+                createdAt:
+                    type: datetime
+                    data_name: c.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: c.updatedAt
+                businessUnit:
+                    label: amaxlab.oro.webstudio.credential.owner.label
+                    type: choice-tree
+                    autocomplete_alias: business_units_tree_search_handler
+                    data_name: c.owner
+                    className: 'Oro\Bundle\OrganizationBundle\Entity\BusinessUnit'
+
+    web-studio-host-credential-grid:
+        extends: web-studio-credential-grid
+        bind_parameters:
+            - host_id

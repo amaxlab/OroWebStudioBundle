@@ -72,6 +72,12 @@ class Host extends ExtendHost
     private $roles;
 
     /**
+     * @var HostCredential[]
+     * @ORM\OneToMany(targetEntity="AmaxLab\Oro\WebStudioBundle\Entity\HostCredential", mappedBy="host")
+     */
+    private $hostCredentials;
+
+    /**
      * @var string
      * @ORM\Column(name="os", type="string", length=255, nullable=true)
      */
@@ -101,6 +107,27 @@ class Host extends ExtendHost
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->hostCredentials = new ArrayCollection();
+    }
+
+    /**
+     * @return HostProvider
+     */
+    public function getHostProvider()
+    {
+        return $this->hostProvider;
+    }
+
+    /**
+     * @param HostProvider $hostProvider
+     *
+     * @return $this
+     */
+    public function setHostProvider($hostProvider)
+    {
+        $this->hostProvider = $hostProvider;
+
+        return $this;
     }
 
     /**
@@ -124,21 +151,21 @@ class Host extends ExtendHost
     }
 
     /**
-     * @return HostProvider
+     * @return HostCredential[]
      */
-    public function getHostProvider()
+    public function getHostCredentials()
     {
-        return $this->hostProvider;
+        return $this->hostCredentials;
     }
 
     /**
-     * @param HostProvider $hostProvider
+     * @param HostCredential[] $hostCredentials
      *
      * @return $this
      */
-    public function setHostProvider($hostProvider)
+    public function setHostCredentials($hostCredentials)
     {
-        $this->hostProvider = $hostProvider;
+        $this->hostCredentials = $hostCredentials;
 
         return $this;
     }

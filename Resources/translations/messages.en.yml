@@ -73,7 +73,19 @@ amaxlab:
                 owner.label: Owner
                 password.label: Password
                 username.label: Username
-                token.label: Token
+
+            hostcredential:
+                entity_label: Host credential
+                entity_plural_label: Host credentials
+                entity_description: ""
+                comment.label: Comment
+                expired_at.label: Expired At
+                id.label: Id
+                host.label: Host
+                organization.label: Organization
+                owner.label: Owner
+                password.label: Password
+                username.label: Username
 
             domain:
                 entity_label: Domain

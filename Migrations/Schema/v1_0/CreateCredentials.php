@@ -34,16 +34,17 @@ class CreateCredentials implements Migration, OrderedMigrationInterface
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('username', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('password', 'string', ['length' => 255, 'notnull' => false]);
-        $table->addColumn('token', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('comment', 'text', ['notnull' => false]);
         $table->addColumn('expired_at', 'date', ['notnull' => false]);
-        $table->addColumn('user_owner_id', 'integer', ['notnull' => false]);
+        $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
+        $table->addColumn('created_at', 'datetime');
+        $table->addColumn('updated_at', 'datetime');
 
-        $table->addIndex(['user_owner_id']);
+        $table->addIndex(['business_unit_owner_id']);
         $table->addIndex(['organization_id']);
 
-        $table->addForeignKeyConstraint($schema->getTable('oro_user'), ['user_owner_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
+        $table->addForeignKeyConstraint($schema->getTable('oro_business_unit'), ['business_unit_owner_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 
         $table->setPrimaryKey(['id']);

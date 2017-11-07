@@ -50,6 +50,17 @@
         }
     ] %}
 
+    {% set dataBlocks = dataBlocks|merge([{
+        'title' : 'amaxlab.oro.webstudio.hostcredential.entity_plural_label'|trans,
+        'subblocks': [{
+            'title' : null,
+            'useSpan': false,
+            'data' : [
+                dataGrid.renderGrid('web-studio-host-credential-grid', {host_id: entity.id}, { cssClass: 'inner-grid' })
+            ]
+        }]
+    }] ) %}
+
     {% set id = 'hostView' %}
     {% set data = { 'dataBlocks': dataBlocks } %}
     {{ parent() }}

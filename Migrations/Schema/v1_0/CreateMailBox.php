@@ -33,6 +33,7 @@ class CreateMailBox implements Migration, OrderedMigrationInterface
 
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('name', 'string', ['length' => 255, 'notnull' => true]);
+        $table->addColumn('password', 'string', ['length' => 255, 'notnull' => true]);
         $table->addColumn('domain_id', 'integer', ['notnull' => true]);
         $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => false]);
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
