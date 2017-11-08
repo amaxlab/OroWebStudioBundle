@@ -9,28 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace AmaxLab\Oro\WebStudioBundle\Migrations\Schema\v1_0;
+namespace AmaxLab\Oro\WebStudioBundle\Migrations\Helper;
 
 use Doctrine\DBAL\Schema\Schema;
-use Oro\Bundle\MigrationBundle\Migration\Migration;
-use Oro\Bundle\MigrationBundle\Migration\OrderedMigrationInterface;
-use Oro\Bundle\MigrationBundle\Migration\QueryBag;
+use Doctrine\DBAL\Schema\Table;
 
 /**
  * @author Egor Zyuskin <ezyuskin@amaxlab.ru>
  */
-class CreateCredentials implements Migration, OrderedMigrationInterface
+class CredentialMigrationHelper
 {
     /**
-     * @param Schema   $schema
-     * @param QueryBag $queries
-     *
-     * @return void
+     * @param Table  $table
+     * @param Schema $schema
      */
-    public function up(Schema $schema, QueryBag $queries)
+    public static function up(Table $table, Schema $schema)
     {
-        $table = $schema->createTable('web_studio_credential');
-
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('username', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('password', 'string', ['length' => 255, 'notnull' => false]);
@@ -48,13 +42,5 @@ class CreateCredentials implements Migration, OrderedMigrationInterface
         $table->addForeignKeyConstraint($schema->getTable('oro_organization'), ['organization_id'], ['id'], ['onDelete' => 'SET NULL', 'onUpdate' => null]);
 
         $table->setPrimaryKey(['id']);
-    }
-
-    /**
-     * @return integer
-     */
-    public function getOrder()
-    {
-        return 10;
     }
 }

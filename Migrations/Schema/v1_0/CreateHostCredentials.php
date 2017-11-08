@@ -11,6 +11,7 @@
 
 namespace AmaxLab\Oro\WebStudioBundle\Migrations\Schema\v1_0;
 
+use AmaxLab\Oro\WebStudioBundle\Migrations\Helper\CredentialMigrationHelper;
 use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\OrderedMigrationInterface;
@@ -31,15 +32,11 @@ class CreateHostCredentials implements Migration, OrderedMigrationInterface
     {
         $table = $schema->createTable('web_studio_host_credential');
 
-        $table->addColumn('id', 'integer', ['autoincrement' => true]);
+        CredentialMigrationHelper::up($table, $schema);
+
         $table->addColumn('host_id', 'integer', ['notnull' => true]);
-
         $table->addIndex(['host_id']);
-
         $table->addForeignKeyConstraint($schema->getTable('web_studio_host'), ['host_id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => null]);
-        $table->addForeignKeyConstraint($schema->getTable('web_studio_credential'), ['id'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => null]);
-
-        $table->setPrimaryKey(['id']);
     }
 
     /**

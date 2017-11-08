@@ -4,12 +4,6 @@ parameters:
     web_studio.domain.entity.class: AmaxLab\Oro\WebStudioBundle\Entity\Domain
 
 services:
-    AmaxLab\Oro\WebStudioBundle\Repository\CredentialRepository:
-        class: AmaxLab\Oro\WebStudioBundle\Repository\CredentialRepository
-        parent: oro_entity.abstract_repository
-        arguments:
-            - '%web_studio.credential.entity.class%'
-
     AmaxLab\Oro\WebStudioBundle\Repository\DomainRepository:
         class: AmaxLab\Oro\WebStudioBundle\Repository\DomainRepository
         parent: oro_entity.abstract_repository

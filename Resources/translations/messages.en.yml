@@ -62,18 +62,6 @@ amaxlab:
                 organization.label: Organization
                 owner.label: Owner
 
-            credential:
-                entity_label: Credential
-                entity_plural_label: Credentials
-                entity_description: ""
-                comment.label: Comment
-                expired_at.label: Expired At
-                id.label: Id
-                organization.label: Organization
-                owner.label: Owner
-                password.label: Password
-                username.label: Username
-
             hostcredential:
                 entity_label: Host credential
                 entity_plural_label: Host credentials
